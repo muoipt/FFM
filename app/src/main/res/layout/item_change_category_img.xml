@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/note_change_background_img_shadow_thumbnail"
+        android:layout_width="165dp"
+        android:layout_height="268dp"
+        android:layout_gravity="top|center_horizontal"
+        android:duplicateParentState="true"
+        android:elevation="2dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/selector_setupwizard_gridview_item"/>
+    <ImageView
+        android:id="@+id/note_change_background_img_thumbnail"
+        android:layout_width="163.5dp"
+        android:layout_height="246dp"
+        android:layout_gravity="center"
+        android:background="@color/color_white"
+        android:scaleType="fitXY" />
+    <TextView
+        android:id="@+id/view_from_gallery"
+        android:layout_width="163.5dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="22dp"
+        android:layout_alignBottom="@+id/note_change_background_img_thumbnail"
+        android:text="From Gallery"
+        android:importantForAccessibility="no"
+        android:textColor="@color/color_black"
+        android:textSize="19dp"
+        android:fontFamily="sec-roboto-light"
+        android:shadowColor="@color/colorlist_8a8a8a"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="1"
+        android:gravity="center"/>
+    <CheckBox
+        android:id="@+id/check_delete"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="top|start"
+        android:layout_marginEnd="6dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:clickable="false"
+        android:background="@drawable/tw_btn_check_bg"
+        android:duplicateParentState="true"
+        android:focusable="false"
+        android:visibility="gone"
+        android:layout_marginRight="6dp"
+        android:layout_marginLeft="5dp" />
+
+</RelativeLayout>

@@ -1,0 +1,261 @@
+<resources>
+    <string name="app_name">FFM</string>
+
+    <string name="parse_app_id">4ab4f9de6a62b739691952443940bddb4acbfd45</string>
+    <string name="parse_client_key">55a1d25059b1d79d0a8290d6d8ce728ae9f93008</string>
+    <string name="parse_server">http://13.250.56.145:80/parse/</string>
+    <string name="gcm_sender_id">510238505569</string>
+
+    <string name="default_type_income">Income</string>
+    <string name="default_type_outcome">Outcome</string>
+
+    <string name="data_type_income">Income</string>
+    <string name="data_type_outcome">Outcome</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="string_nav_drawer_item_important_cat_name">Important categories</string>
+    <string name="string_nav_drawer_item_group_name">My Group</string>
+    <string name="string_nav_drawer_item_chart_name">Chart</string>
+    <string name="string_nav_drawer_item_about_name">About</string>
+    <string name="string_nav_drawer_item_setting_name">Settings</string>
+
+    <string name="string_main_summary_report_status_ok">OK</string>
+    <string name="string_main_summary_report_status_not">OVER</string>
+    <string name="string_ok">OK</string>
+    <string name="string_cancel">CANCEL</string>
+    <string name="string_close">CLOSE</string>
+    <string name="string_update">UPDATE</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Main screen display-->
+    <string name="main_banner_text">July 2017!</string>
+    <string name="main_textview_category">Category</string>
+    <string name="main_textview_amount">Amount</string>
+    <string name="main_textview_status">Status</string>
+    <string name="main_textview_sum">Sum</string>
+    <string name="main_textview_total">Total</string>
+    <string name="main_textview_summary">SUMMARY</string>
+    <string name="main_textview_report">REPORT</string>
+    <string name="add_new_category_text">New category</string>
+    <string name="add_new_report_text">New report</string>
+    <string name="add_new_category_name_text">Name</string>
+    <string name="add_new_category_type_text">Type</string>
+    <string name="add_new_category_limit_text">Limit</string>
+    <string name="add_new_category_avatar_text">Image</string>
+    <string name="add_new_category_type_income_text">Income</string>
+    <string name="add_new_category_type_outcome_text">Outcome</string>
+
+    <string name="add_new_report_category_text">Category</string>
+    <string name="add_new_report_title_text">Title</string>
+    <string name="add_new_report_amount_text">Amount</string>
+    <string name="add_new_report_notes_text">Notes</string>
+
+
+    <!--report screen display-->
+    <string name="report_recycle_view_column_datetime">Date time</string>
+    <string name="report_recycle_view_column_amount">Amount</string>
+    <string name="report_recycle_view_column_title">Title</string>
+    <string name="report_recycle_view_column_note">Note</string>
+    <string name="title_activity_category__add__new_">Add Category</string>
+    <string name="title_activity_category_update">Update Category</string>
+    <string name="title_activity_report_update">Update Report</string>
+    <string name="title_activity_about">About</string>
+
+
+    <!--add new category-->
+    <string name="error_cat_name_exist">Category name is already existed</string>
+    <string name="error_cat_name_required">Category name is required</string>
+    <string name="error_cat_type_required">Type is required</string>
+    <string name="error_cat_limit_required">Limit is required</string>
+    <string name="title_activity_login">Sign in to FFM</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_group">Group name</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sync">Sync with server</string>
+    <string name="action_group_add_new">Register</string>
+    <string name="action_group_update">Update</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_sign_up_short">Sign up</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_field_format">This field required correct number</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="title_activity_sign_up">Sign Up FFM</string>
+    <string name="title_user_signup_avatar">Avatar</string>
+    <string name="title_activity_group_add_new">Add group</string>
+    <string name="title_activity_group_update">Update group</string>
+    <string name="action_register">Register</string>
+    <string name="action_add_goup">Add group</string>
+
+    <string name="add_group_name_exist">Group name is existed</string>
+    <string name="add_group_fail_common">Add group failed</string>
+
+    <string name="error_sign_up_email_exist">Email is existed</string>
+    <string name="error_sign_up_group_not_exist">Group is not existed</string>
+
+    <string name="default_group">My Group</string>
+    <string name="default_user_email">My email</string>
+    <string name="title_activity_add_new">AddNewActivity</string>
+    <string name="title_bottom_nav_category">Home</string>
+    <string name="title_bottom_nav_report">Dashboard</string>
+    <string name="title_activity_report_add_new">Add Report</string>
+    <string name="button_save">SAVE</string>
+    <string name="button_cancel">CANCEL</string>
+    <string name="button_ok">OK</string>
+
+    <string name="minLimitValue">0</string>
+    <string name="maxLimitValue">100</string>
+
+    <string name="sync_question">Do you want to sync with server ?</string>
+    <string name="title_activity_group_list_member">GroupListMemberActivity</string>
+
+
+    <string name="delete_question">Do you want to delete these report ?</string>
+    <string name="delete_category_question">Do you want to delete these Categories and all reports of these Categories ?</string>
+
+    <string name="search_hint">Input search text</string>
+    <string name="search_action">SEARCH</string>
+
+    <string name="forgot_pass_text">Please input email to receive a new password</string>
+    <string name="action_reset_password">RESET</string>
+
+    <string name="reset_result_hint">Reseted password is sent to your email, please check email to verify new password</string>
+
+    <string name="new_user_list">New user</string>
+    <string name="active_user_list">Active user</string>
+    <string name="removed_user_list">Deactive user</string>
+
+    <string name="action_approve">Approve</string>
+    <string name="action_reject">Reject</string>
+    <string name="action_remove">Remove</string>
+    <string name="my_group">My Group</string>
+    <string name="title_activity_chart_view">Chart view</string>
+    <string name="title_income">Income</string>
+    <string name="title_outcome">Outcome</string>
+
+    <string name="chart_des_income_title">Income illustration on </string>
+    <string name="chart_des_outcome_title">Outcome illustration on </string>
+    <string name="watch_by_month">Month</string>
+    <string name="watch_by_week">Week</string>
+    <string name="watch_by_today">Today</string>
+    <string name="year">Year</string>
+
+    <string name="chart_des_income_outcome">Income vs Outcome Illustration</string>
+
+    <string name="jan">Jan</string>
+    <string name="feb">Feb</string>
+    <string name="mar">Mar</string>
+    <string name="apr">Apr</string>
+    <string name="may">May</string>
+    <string name="jun">Jun</string>
+    <string name="jul">Jul</string>
+    <string name="aug">Aug</string>
+    <string name="sep">Sep</string>
+    <string name="oct">Oct</string>
+    <string name="nov">Nov</string>
+    <string name="dec">Dec</string>
+
+    <string name="search_user_result">Found Users</string>
+    <string name="search_category_result">Found Categories</string>
+    <string name="search_report_result">Found Reports</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+
+    <string name="sync_setting_title">Always sync with server</string>
+    <string name="acount_setting_title">Account</string>
+    <string name="theme_setting_title">Change theme</string>
+    <string name="text_setting_title">Change text</string>
+
+    <string name="select_color">Select color</string>
+    <string name="avatar_chooser">Select sample avatar</string>
+
+    <string name="user_view">User Info</string>
+
+
+</resources>

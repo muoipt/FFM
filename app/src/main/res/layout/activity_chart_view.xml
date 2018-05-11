@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.xalenmy.ffm.view.ChartViewActivity">
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemIconTint="@drawable/item_nav_bottom_text"
+        app:itemTextColor="@drawable/item_nav_bottom_text"
+        app:menu="@menu/navigation" />
+
+    <LinearLayout
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_80"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/txtBarChartTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/chart_des_income_outcome"
+            android:textAlignment="center"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/sp_16"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/btn_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_round_color_text_title"
+            android:text="2018"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:visibility="invisible"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_chart_label"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_above="@id/layout_title"
+        android:background="@color/color_white"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:visibility="invisible">
+
+        <ImageButton
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
+            android:background="@color/main_color_banner"
+            android:layout_marginLeft="@dimen/dp_16"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_type_income"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:textColor="@color/main_color_banner"/>
+        <ImageButton
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
+            android:background="@color/red_color"
+            android:layout_marginLeft="@dimen/dp_16"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_type_outcome"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:textColor="@color/red_color"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_option"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/navigation"
+        android:layout_marginBottom="@dimen/dp_16"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:background="@color/color_white">
+
+        <Button
+            android:id="@+id/btnWatchByMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_common_background"
+            android:text="@string/watch_by_month"
+            android:textColor="@color/setting_item_color_textview_details" />
+
+        <Button
+            android:id="@+id/btnWatchByWeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_24"
+            android:background="@drawable/button_round_corner_text"
+            android:text="@string/watch_by_week"
+            android:textColor="@color/setting_item_color_textview_details" />
+
+        <Button
+            android:id="@+id/btnWatchByDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_24"
+            android:background="@drawable/button_round_corner_text"
+            android:text="@string/watch_by_today"
+            android:textColor="@color/setting_item_color_textview_details" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/chartContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/layout_option"
+        android:layout_marginBottom="@dimen/dp_30"
+        android:layout_weight="1"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_36"></FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/chart_type_bar"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_margin="@dimen/dp_8"
+            android:backgroundTint="@color/color_white"
+            android:src="@drawable/ic_action_chart_bar" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/chart_type_pie"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_margin="@dimen/dp_8"
+            android:layout_below="@id/chart_type_bar"
+            android:backgroundTint="@color/color_white"
+            android:src="@drawable/ic_action_pie_chart" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
