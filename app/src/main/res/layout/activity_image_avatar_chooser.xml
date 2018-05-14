@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.xalenmy.ffm.view.ImageAvatarChooserActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/avatar_chooser_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:titleTextColor="@color/color_white"
+        android:paddingTop="@dimen/dp_20"/>
+    <FrameLayout
+        android:id="@+id/frame_sample_avatar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ffm2"/>
+    </FrameLayout>
+
+</LinearLayout>

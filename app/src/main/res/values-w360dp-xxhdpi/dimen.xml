@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="app_bar_main_img_banner_height">90dp</dimen>
+    <dimen name="dp_50_margin_top_app_main_banner">50dp</dimen>
+    <dimen name="dp_160">110dp</dimen>
+    <dimen name="dp_100">50dp</dimen>
+    <dimen name="dp_100_app_icon_width">100dp</dimen>
+    <dimen name="dp_100_app_icon_margin_top">100dp</dimen>
+    <dimen name="add_new_category_textsize">25sp</dimen>
+    <dimen name="add_new_category_layout_padding_name">15dp</dimen>
+    <dimen name="add_new_category_avatar_padding">14dp</dimen>
+    <dimen name="nav_header_height">250dp</dimen>
+</resources>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.xalenmy.ffm.view.CategoryAddNewActivity">
+
+    <ProgressBar
+        android:id="@+id/add_cat_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/add_new_cat_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/add_cat_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextColor="@color/color_white"
+            app:titleTextAppearance="@style/Toolbar.TitleText"
+            app:layout_scrollFlags="scroll"
+            android:paddingTop="@dimen/dp_20"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_white">
+
+                    <ImageView
+                        android:id="@+id/img_banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_160"
+                        android:alpha="0.4"
+                        android:background="@drawable/img_cate_1" />
+
+                    <TextView
+                        android:id="@+id/txt_banner_new_cat"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_100"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:gravity="center"
+                        android:text="@string/add_new_category_text"
+                        android:textColor="@color/color_black_opacity_10"
+                        android:textSize="@dimen/add_new_category_textsize" />
+                </RelativeLayout>
+
+                <include layout="@layout/content_category__add__new_" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabCatMark"
+        android:layout_width="@dimen/add_new_category_mark_btn_width"
+        android:layout_height="@dimen/add_new_category_mark_btn_width"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_anchor="@id/img_banner"
+        app:layout_anchorGravity="bottom|end"
+        app:srcCompat="@drawable/ic_add_cat_mark" />
+
+</android.support.design.widget.CoordinatorLayout>

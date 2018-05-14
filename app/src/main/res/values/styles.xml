@@ -1,0 +1,109 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/color_transparent</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:textColorSecondary">@color/color_white</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+    </style>
+
+    <style name="EditTextTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorPrimary">@color/color_white</item>
+        <item name="colorPrimaryDark">@color/color_white</item>
+        <item name="colorAccent">@color/color_white</item>
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:textColorSecondary">@color/color_white</item>
+        <item name="android:backgroundTint">@color/color_white</item>
+        <item name="android:tint">@color/color_white</item>
+        <item name="android:foregroundTint">@color/color_white</item>
+        <item name="android:textColorLink">@color/color_transparent</item>
+        <item name="android:textColorHint">@color/color_white</item>
+        <item name="android:textColorHighlight">@color/color_white</item>
+        <item name="android:shadowColor">@color/color_white</item>
+    </style>
+
+    <style name="EditTextThemeDark" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorPrimary">@color/color_black</item>
+        <item name="colorPrimaryDark">@color/color_black</item>
+        <item name="colorAccent">@color/color_black</item>
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:textColorSecondary">@color/color_black</item>
+        <item name="android:backgroundTint">@color/color_black</item>
+        <item name="android:tint">@color/color_black</item>
+        <item name="android:foregroundTint">@color/color_black</item>
+        <item name="android:textColorLink">@color/color_transparent</item>
+        <item name="android:textColorHint">@color/color_black</item>
+        <item name="android:textColorHighlight">@color/color_black</item>
+        <item name="android:shadowColor">@color/color_black</item>
+    </style>
+
+    <style name="BottomNaviTheme" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorPrimary">@color/color_black</item>
+        <item name="colorPrimaryDark">@color/color_black</item>
+        <item name="colorAccent">@color/color_black</item>
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:textColorSecondary">@color/setting_item_color_textview_details</item>
+        <item name="android:navigationBarColor">@color/color_black</item>
+    </style>
+
+    <style name="AddCategoryTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/color_black</item>
+        <item name="colorPrimaryDark">@color/color_black</item>
+        <item name="colorAccent">@color/color_black</item>
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:textColorSecondary">@color/color_black</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"></style>
+
+    <style name="appBarCustomTab" parent="Widget.Design.TabLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="tabIndicatorColor">@color/main_color_listview_status_not</item>
+        <item name="tabIndicatorHeight">1dp</item>
+        <item name="tabTextAppearance">@style/appBarCustomTabTextAppearance</item>
+        <item name="tabSelectedTextColor">@color/main_color_listview_status_not</item>
+    </style>
+
+    <style name="appBarCustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/tab_text_size</item>
+        <item name="android:textColor">?attr/colorAccent</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="addReportItemStyle" parent="Widget.Design.TextInputLayout">
+        <item name="android:layout_marginLeft">@dimen/add_new_report_layout_margin_left_right</item>
+        <item name="android:layout_marginRight">@dimen/add_new_report_layout_margin_left_right</item>
+        <item name="android:layout_marginTop">@dimen/add_new_report_layout_margin_top</item>
+        <item name="android:paddingLeft">@dimen/add_new_report_layout_padding_left_right</item>
+        <item name="android:paddingRight">@dimen/add_new_report_layout_padding_left_right</item>
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="colorPrimary">@color/color_black</item>
+        <item name="colorPrimaryDark">@color/color_black</item>
+        <item name="colorAccent">@color/color_black</item>
+        <item name="android:textColorSecondary">@color/color_black</item>
+        <item name="android:backgroundTint">@color/color_black</item>
+        <item name="android:tint">@color/color_black</item>
+        <item name="android:foregroundTint">@color/color_black</item>
+        <item name="android:textColorLink">@color/color_transparent</item>
+    </style>
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+
+</resources>

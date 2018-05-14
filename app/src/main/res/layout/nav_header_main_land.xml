@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_68"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/dp_24"
+    android:paddingBottom="@dimen/dp_8"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <TextView
+        android:id="@+id/txtHeaderMainGroupName_land"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/default_group"
+        android:textSize="@dimen/header_main_group_textzise"
+        android:textColor="@color/color_black"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/nav_vertical_margin_bottom"/>
+
+    <TextView
+        android:id="@+id/txtHeaderMainUserEmail_land"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/default_user_email"
+        android:textSize="@dimen/header_main_user_textzise"
+        android:textColor="@color/color_nav_header_main_text"/>
+
+
+</LinearLayout>

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.xalenmy.ffm.view.MainSearchActivity">
+
+    <LinearLayout
+        android:id="@+id/input_key_search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/dp_16">
+
+        <ImageView
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_margin="@dimen/dp_8"
+            app:srcCompat="@drawable/ic_action_search" />
+
+        <EditText
+            android:id="@+id/edit_search_text"
+            style="@style/EditTextTheme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_16"
+            android:hint="@string/search_hint" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:id="@+id/layout_list_search_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtDiv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/nav_divider_height"
+                android:visibility="visible" />
+
+            <RelativeLayout
+                android:id="@+id/layout_search_user_result"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50">
+
+                <LinearLayout
+                    android:id="@+id/extend1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp_10">
+
+                    <ImageButton
+                        android:id="@+id/btnExtentUserList"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_arrow_drop_down_black"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@id/extend1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/nav_drawer_item_padding"
+                    android:paddingRight="@dimen/nav_drawer_item_padding">
+
+                    <ImageView
+                        android:layout_width="@dimen/nav_drawer_item_icon_width"
+                        android:layout_height="@dimen/nav_drawer_item_icon_width"
+                        android:src="@drawable/search_user" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_20"
+                        android:text="@string/search_user_result"
+                        android:textSize="@dimen/text_size_normal" />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txtDiv1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/nav_divider_height"
+                android:visibility="visible" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/lst_search_user_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:dividerHeight="@dimen/nav_divider_height"
+                android:nestedScrollingEnabled="true"
+                android:scrollbars="none"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/txtDiv4"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/nav_divider_height"
+                android:visibility="visible" />
+
+            <RelativeLayout
+                android:id="@+id/layout_search_cat_result"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50">
+
+                <LinearLayout
+                    android:id="@+id/extend2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp_10">
+
+                    <ImageButton
+                        android:id="@+id/btnExtentCatList"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_arrow_drop_down_black"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@id/extend2"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/nav_drawer_item_padding"
+                    android:paddingRight="@dimen/nav_drawer_item_padding">
+
+                    <ImageView
+                        android:layout_width="@dimen/nav_drawer_item_icon_width"
+                        android:layout_height="@dimen/nav_drawer_item_icon_width"
+                        android:src="@drawable/search_cat" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_20"
+                        android:text="@string/search_category_result"
+                        android:textSize="@dimen/text_size_normal" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txtDiv2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/nav_divider_height"
+                android:visibility="visible" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/lst_search_cat_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:dividerHeight="@dimen/nav_divider_height"
+                android:nestedScrollingEnabled="true"
+                android:scrollbars="none"
+                android:visibility="visible" />
+            <TextView
+                android:id="@+id/txtDiv5"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/nav_divider_height"
+                android:visibility="visible" />
+
+            <RelativeLayout
+                android:id="@+id/layout_search_report_result"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50">
+
+                <LinearLayout
+                    android:id="@+id/extend3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp_10">
+
+                    <ImageButton
+                        android:id="@+id/btnExtentReportList"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_arrow_drop_down_black"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@id/extend3"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/nav_drawer_item_padding"
+                    android:paddingRight="@dimen/nav_drawer_item_padding">
+
+                    <ImageView
+                        android:layout_width="@dimen/nav_drawer_item_icon_width"
+                        android:layout_height="@dimen/nav_drawer_item_icon_width"
+                        android:src="@drawable/search_report" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_20"
+                        android:text="@string/search_report_result"
+                        android:textSize="@dimen/text_size_normal" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txtDiv3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/nav_divider_height"
+                android:visibility="visible" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/lst_search_report_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:dividerHeight="@dimen/nav_divider_height"
+                android:nestedScrollingEnabled="true"
+                android:scrollbars="none"
+                android:visibility="visible" />
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

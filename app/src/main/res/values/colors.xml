@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#ff0000</color>
+
+    <!--<color name="colorPrimary">#d8d8d8</color>-->
+    <!--<color name="colorPrimaryDark">#7f7f7f</color>-->
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#FFFFFF</color>
+    <!--<color name="colorAccent">#ff0000</color>-->
+
+    <!--main listview screen-->
+    <color name="main_color_banner">#aa99cc00</color>
+    <color name="main_color_banner_textview">#ffffff</color>
+    <color name="main_color_footer">#e0e0e0</color>
+    <color name="main_color_listview">#f2f2f2</color>
+    <color name="main_color_listview_divider">#d8d8d8</color>
+    <color name="main_color_divider">#aa99cc00</color>
+    <color name="main_color_listview_title">#000000</color>
+    <color name="main_color_listview_item">#666666</color>
+    <color name="main_color_listview_status_ok">#ff99cc00</color>
+    <color name="main_color_listview_status_not">#ff0000</color>
+
+    <color name="red_color">#ff0000</color>
+
+    <!--setting screen-->
+    <color name="setting_color_banner_textview">#000000</color>
+    <color name="setting_item_color_textview">#323232</color>
+    <color name="setting_color_divider">#d8d8d8</color>
+    <color name="color_silver">#d8d8d8</color>
+    <color name="color_silver_opacity">#88d8d8d8</color>
+    <color name="setting_item_color_textview_details">#7f7f7f</color>
+    <color name="colorlist_cecece">#cecece</color>
+    <color name="color_white">#FFFAFAFA</color>
+    <color name="white_color">#FFFFFFFF</color>
+    <color name="color_spinner_count">#fe4702</color>
+    <color name="color_transparent">#00000000</color>
+    <color name="colorlist_8a8a8a">#8a8a8a</color>
+    <color name="color_black">#FF252525</color>
+    <color name="color_spinner_select">#0084a5</color>
+    <color name="color_black_opacity_16">#5E252525</color>
+    <color name="color_black_opacity_10">#666666</color>
+    <color name="color_spinner_text_color">#fe4702</color>
+    <color name="colorlist_252525">#252525</color>
+    <color name="color_black_opacity_15">#29525525</color>
+    <color name="main_color_banner_opacity">#d7eec5</color>
+    <color name="color_nav_header_main_text">#424242</color>
+
+    <!--main report fragment-->
+    <color name="cardview_dark_background">#FF424242</color>
+
+    <color name="color_setting_1_alpha1">#3399cc00</color>
+    <color name="color_setting_2_alpha1">#330084ff</color>
+    <color name="color_setting_3_alpha1">#33ffc300</color>
+    <color name="color_setting_4_alpha1">#33fc3b4b</color>
+    <color name="color_setting_5_alpha1">#33d696bb</color>
+    <color name="color_setting_6_alpha1">#33f2f2f2</color>
+    <color name="color_setting_7_alpha1">#3344bfc7</color>
+    <color name="color_setting_8_alpha1">#33ff7e2a</color>
+    <color name="color_setting_9_alpha1">#33e78586</color>
+    <color name="color_setting_10_alpha1">#337646fe</color>
+    <color name="color_setting_11_alpha1">#3320cdf5</color>
+    <color name="color_setting_12_alpha1">#3367b869</color>
+    <color name="color_setting_13_alpha1">#33d4a88d</color>
+    <color name="color_setting_14_alpha1">#33ff5ca1</color>
+    <color name="color_setting_15_alpha1">#33000000</color>
+
+    <color name="color_setting_1_alpha2">#5599cc00</color>
+    <color name="color_setting_2_alpha2">#550084ff</color>
+    <color name="color_setting_3_alpha2">#55ffc300</color>
+    <color name="color_setting_4_alpha2">#55fc3b4b</color>
+    <color name="color_setting_5_alpha2">#55d696bb</color>
+    <color name="color_setting_6_alpha2">#55f2f2f2</color>
+    <color name="color_setting_7_alpha2">#5544bfc7</color>
+    <color name="color_setting_8_alpha2">#55ff7e2a</color>
+    <color name="color_setting_9_alpha2">#55e78586</color>
+    <color name="color_setting_10_alpha2">#557646fe</color>
+    <color name="color_setting_11_alpha2">#5520cdf5</color>
+    <color name="color_setting_12_alpha2">#5567b869</color>
+    <color name="color_setting_13_alpha2">#55d4a88d</color>
+    <color name="color_setting_14_alpha2">#55ff5ca1</color>
+    <color name="color_setting_15_alpha2">#55000000</color>
+
+    <color name="color_setting_1">#99cc00</color>
+    <color name="color_setting_2">#0084ff</color>
+    <color name="color_setting_3">#ffc300</color>
+    <color name="color_setting_4">#fc3b4b</color>
+    <color name="color_setting_5">#d696bb</color>
+    <color name="color_setting_6">#f2f2f2</color>
+    <color name="color_setting_7">#44bfc7</color>
+    <color name="color_setting_8">#ff7e2a</color>
+    <color name="color_setting_9">#e78586</color>
+    <color name="color_setting_10">#7646fe</color>
+    <color name="color_setting_11">#20cdf5</color>
+    <color name="color_setting_12">#67b869</color>
+    <color name="color_setting_13">#d4a88d</color>
+    <color name="color_setting_14">#ff5ca1</color>
+    <color name="color_setting_15">#000000</color>
+
+
+</resources>

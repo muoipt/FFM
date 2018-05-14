@@ -1,0 +1,153 @@
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_horizontal_margin_small">5dp</dimen>
+    <dimen name="activity_horizontal_margin_extra">26dp</dimen>
+    <dimen name="activity_horizontal_margin_right">50dp</dimen>
+    <dimen name="activity_horizontal_margin_top">26dp</dimen>
+    <dimen name="activity_horizontal_margin_bottom">26dp</dimen>
+    <dimen name="activity_horizontal_margin_top_extra">36dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin_bottom">12dp</dimen>
+    <dimen name="nav_vertical_margin_bottom">5dp</dimen>
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">68dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="button_size_24dp">24dp</dimen>
+
+
+    <dimen name="img_header_main_icon_width">120dp</dimen>
+    <dimen name="img_header_main_icon_height">120dp</dimen>
+    <dimen name="header_main_group_textzise">20sp</dimen>
+    <dimen name="header_main_user_textzise">13sp</dimen>
+    <dimen name="app_bar_main_img_banner_height">160dp</dimen>
+    <dimen name="dp_50_margin_top_app_main_banner">60dp</dimen>
+    <dimen name="tab_max_width">1920dp</dimen>
+    <dimen name="tab_text_size">16sp</dimen>
+    <dimen name="nav_divider_height">0.5dp</dimen>
+    <dimen name="nav_drawer_item_margin_top">20dp</dimen>
+    <dimen name="nav_drawer_item_padding">10dp</dimen>
+    <dimen name="nav_drawer_item_padding_left">5dp</dimen>
+    <dimen name="nav_drawer_item_icon_width">36dp</dimen>
+    <dimen name="nav_drawer_item_name_width">190dp</dimen>
+
+    <dimen name="fab_button_add_layout_width">72dp</dimen>
+
+    <dimen name="tab_padding_bottom">16dp</dimen>
+    <dimen name="tab_label">20sp</dimen>
+    <dimen name="custom_tab_layout_height">72dp</dimen>
+
+
+    <!--Main summary screen display-->
+    <dimen name="main_banner_height">150dp</dimen>
+    <dimen name="main_banner_textsize">35dp</dimen>
+    <dimen name="main_layout_margin_top">15dp</dimen>
+    <dimen name="main_layout_column_width">230dp</dimen>
+    <dimen name="main_column_textsize">20dp</dimen>
+    <dimen name="main_row_divider_height">1dp</dimen>
+    <dimen name="main_listview_row_divider_height">0.1dp</dimen>
+    <dimen name="main_listview_title_divider_height">0.2dp</dimen>
+    <dimen name="main_listview_height">350dp</dimen>
+    <dimen name="main_layout_margin_top_height">2dp</dimen>
+    <dimen name="main_layout_padding_left">30dp</dimen>
+    <dimen name="common_padding_minor">10dp</dimen>
+
+    <dimen name="main_layout_amount_padding_left">50dp</dimen>
+    <dimen name="main_button_layout_width">48dp</dimen>
+    <dimen name="main_button_layout_height">48dp</dimen>
+    <dimen name="main_button_add_layout_width">72dp</dimen>
+    <dimen name="main_button_add_layout_height">72dp</dimen>
+    <dimen name="main_button_margin_left">20dp</dimen>
+    <dimen name="main_button_add_margin_top">5dp</dimen>
+    <dimen name="main_button_add_margin_right">5dp</dimen>
+    <dimen name="main_summary_recycle_text_size">15sp</dimen>
+    <dimen name="main_summary_recycle_row_min_height">50dp</dimen>
+    <dimen name="main_summary_recycle_account_column_padding_left">50dp</dimen>
+    <dimen name="main_summary_recycle_divider_margin">5dp</dimen>
+
+    <dimen name="main_summary_recycle_title_height">30dp</dimen>
+    <dimen name="main_summary_recycle_title_text_size">15sp</dimen>
+    <dimen name="add_new_category_textsize">35sp</dimen>
+    <dimen name="add_new_category_row_height">90dp</dimen>
+    <dimen name="add_new_category_row_height_avatar">85dp</dimen>
+    <dimen name="add_new_category_title_width">150dp</dimen>
+    <dimen name="add_new_category_layout_margin_top">20dp</dimen>
+    <dimen name="add_new_category_layout_padding">15dp</dimen>
+    <dimen name="add_new_category_layout_padding_name">20dp</dimen>
+    <dimen name="add_new_category_avatar_padding">30dp</dimen>
+    <dimen name="imgBtnCatAvatarWidth">60dp</dimen>
+    <dimen name="add_new_category_button_width">250dp</dimen>
+    <dimen name="add_new_category_button_height">100dp</dimen>
+    <dimen name="add_new_category_type_radio_width">250dp</dimen>
+    <dimen name="add_new_category_seekbar_width">235dp</dimen>
+    <dimen name="add_new_category_mark_btn_width">60dp</dimen>
+    <dimen name="add_new_category_title_textsize">20sp</dimen>
+    <dimen name="add_new_category_selected_avatar_height">2dp</dimen>
+    <dimen name="add_new_category_selected_avatar_margin_top">5dp</dimen>
+
+
+    <!--report detail display screen-->
+    <dimen name="report_display_recycle_row_min_height">60dp</dimen>
+    <dimen name="report_display_recycle_row_margin">5dp</dimen>
+    <dimen name="report_display_recycle_column_note_margin">10dp</dimen>
+    <dimen name="report_display_recycle_text_size">20sp</dimen>
+    <dimen name="report_display_recycle_column_width">190dp</dimen>
+    <dimen name="report_display_recycle_column_datetime_width">100dp</dimen>
+    <dimen name="app_bar_height">240dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="text_margin_large">32dp</dimen>
+    <dimen name="text_margin_extra_large">154dp</dimen>
+    <dimen name="text_size_normal">16sp</dimen>
+    <dimen name="text_size_large">25sp</dimen>
+
+    <dimen name="button_margin_bottom">10dp</dimen>
+    <dimen name="ProgressBar_margin">8dp</dimen>
+
+    <dimen name="add_new_report_layout_padding_left_right">20dp</dimen>
+    <dimen name="add_new_report_item_padding_left">30dp</dimen>
+    <dimen name="add_new_report_layout_margin_left_right">10dp</dimen>
+    <dimen name="add_new_report_layout_margin_top">10dp</dimen>
+    <dimen name="add_new_report_row_height">60dp</dimen>
+    <dimen name="add_new_report_toolbar_height">60dp</dimen>
+    <dimen name="add_new_report_toolbar_btn_width">200dp</dimen>
+
+    <dimen name="img_sync_width">150dp</dimen>
+    <dimen name="img_sync_height">100dp</dimen>
+    <dimen name="popup_dialog_width">250dp</dimen>
+    <dimen name="popup_dialog_height">300dp</dimen>
+
+    <dimen name="important_cat_list_item_height">40dp</dimen>
+    <dimen name="important_cat_list_padding_left">20dp</dimen>
+
+    <dimen name="member_list_app_bar_height">280dp</dimen>
+    <dimen name="member_item_img_width">46dp</dimen>
+
+    <dimen name="popup_dialog_padding">20dp</dimen>
+    <dimen name="dp_8">8dp</dimen>
+    <dimen name="dp_120">120dp</dimen>
+    <dimen name="dp_240">240dp</dimen>
+    <dimen name="dp_160">160dp</dimen>
+    <dimen name="dp_100">100dp</dimen>
+    <dimen name="dp_100_app_icon_width">100dp</dimen>
+    <dimen name="dp_100_app_icon_margin_top">70dp</dimen>
+    <dimen name="dp_10">10dp</dimen>
+    <dimen name="dp_10_padding_left_right">20dp</dimen>
+    <dimen name="dp_40">40dp</dimen>
+    <dimen name="dp_5">5dp</dimen>
+    <dimen name="dp_36">16dp</dimen>
+    <dimen name="dp_24">24dp</dimen>
+    <dimen name="dp_150">150dp</dimen>
+    <dimen name="dp_1">1dp</dimen>
+    <dimen name="dp_0_5">0.5dp</dimen>
+    <dimen name="dp_3">3dp</dimen>
+    <dimen name="dp_16">16dp</dimen>
+    <dimen name="dp_2">2dp</dimen>
+    <dimen name="dp_4">4dp</dimen>
+    <dimen name="dp_9">9dp</dimen>
+    <dimen name="dp_30">10dp</dimen>
+
+    <dimen name="sp_16">16sp</dimen>
+    <dimen name="sp_20">20sp</dimen>
+    <dimen name="dp_68">68dp</dimen>
+
+
+</resources>
