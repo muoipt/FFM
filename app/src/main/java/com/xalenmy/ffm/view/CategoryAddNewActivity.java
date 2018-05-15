@@ -801,15 +801,6 @@ public class CategoryAddNewActivity extends AppCompatActivity implements View.On
     }
 
     @Subscribe
-    public void processAvatar(ImageAvatarChooserFragment.BackgroundItem avatar) {
-        if (avatar.getMsg().equals("MSG_SAMPLE_AVATAR_ITEM")) {
-            int imgId = avatar.getThumbIDSmall();
-            imgAvatarChoose.setImageResource(imgId);
-            catInputAvatar = imgId;
-        }
-    }
-
-    @Subscribe
     public void processGalaryAvatar(GroupImgPathEventObj obj) {
         if (obj.getMsg().equals("GROUP_AVATAR_IMG_PATH")) {
             String imgPath = obj.getImgPath();
