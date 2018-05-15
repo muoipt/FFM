@@ -330,6 +330,7 @@ public class MainActivity extends AppCompatActivity
         return bitmap;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initControl() {
         groupDetailDBControl = new GroupDetailControl(this);
         groupDetailServerControl = new GroupDetailServerControl(this);
@@ -414,10 +415,15 @@ public class MainActivity extends AppCompatActivity
         }
         if (id == R.id.action_Delete) {
 //            return deleteAllServerData() && deleteAllDBData();
-            if (viewPagerPos == 0) {
-                processDeleteSelectedCategories();
-            } else if (viewPagerPos == 1) {
-                processDeleteSelectedReport();
+
+            if(currentUser.getUserEmail() == null ){
+                displayAlertDlg(0);
+            } else {
+                if (viewPagerPos == 0) {
+                    processDeleteSelectedCategories();
+                } else if (viewPagerPos == 1) {
+                    processDeleteSelectedReport();
+                }
             }
             return true;
         }
