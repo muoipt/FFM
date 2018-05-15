@@ -52,6 +52,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.muoipt.ffm.adapter.CatListviewAdapter;
 import com.muoipt.ffm.control.CategoryDetailControl;
@@ -403,9 +404,9 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
         if (id == R.id.action_Delete) {
-//            return deleteAllServerData() && deleteAllDBData();
+//            return deleteAllServerData();// && deleteAllDBData();
 
-            if(currentUser.getUserEmail() == null ){
+            if (currentUser.getUserEmail() == null) {
                 displayAlertDlg(0);
             } else {
                 if (viewPagerPos == 0) {
@@ -518,6 +519,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.imageViewHeaderMainIcon:
                 processMyGroup();
+//                processChangeUserAvatar();
 //                processChangeGroupAvatar();
                 break;
             default:
@@ -538,7 +540,7 @@ public class MainActivity extends AppCompatActivity
             txt_message.setText(getString(R.string.alert_login_info));
         } else if (item == 1) {
             txt_message.setText(getString(R.string.alert_internet_info));
-        } else if(item == 2){
+        } else if (item == 2) {
             txt_message.setText(getString(R.string.alert_user_status_info));
         }
 
@@ -695,6 +697,18 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    private GroupDetail getCurrentLogInGroupByUser(int groupId) {
+        GroupDetail currentLogInGroup = null;
+
+        currentLogInGroup = groupDetailDBControl.findGroupById(groupId);
+
+//        if (currentLogInGroup == null) {
+//            currentLogInGroup = groupDetailServerControl.getGroupServerDataById(groupId);
+//        }
+
+        return currentLogInGroup;
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -708,16 +722,23 @@ public class MainActivity extends AppCompatActivity
                     Bundle bundle = data.getBundleExtra(ComonUtils.LOG_IN_INTENT);
                     if (bundle != null) {
                         currentUser = (UserDetail) bundle.getSerializable(ComonUtils.LOG_IN_BUNDLE);
+                        if (currentUser.getUserAvatarImgPath() != null && !currentUser.getUserAvatarImgPath().equals("")) {
+                            imageViewHeaderMainIcon.setImageBitmap(getAvatarBitmapFromPath(currentUser.getUserAvatarImgPath()));
+                        }
 
-                        GroupDetail currentGroup = groupDetailDBControl.findGroupById(currentUser.getUserGroupId());
+                        GroupDetail currentLogInGroup = getCurrentLogInGroupByUser(currentUser.getUserGroupId());
 
-                        txtHeaderMainGroupName.setText(currentGroup.getGroupName());
+                        if (currentLogInGroup != null) {
+                            txtHeaderMainGroupName.setText(currentLogInGroup.getGroupName());
+                        }
 
+                        AppConfig.saveGroupInfoToSharePreference(currentLogInGroup);
                         txtHeaderMainUserEmail.setText(currentUser.getUserEmail());
                     }
                 }
                 //luu user info vao share preference
                 AppConfig.saveUserInfoToSharePreference(currentUser);
+
                 isNoNeedToRefreshMainSummaryRecyle = false;
                 isNoNeedToRefreshMainReportRecyle = false;
                 isNoNeedToRefreshcatlist = false;
@@ -907,8 +928,8 @@ public class MainActivity extends AppCompatActivity
             txtHeaderMainUserEmail.setText(currentUser.getUserEmail());
 
             if (imageViewHeaderMainIcon != null) {
-                if (currentGroup.getGroupAvatarImgPath() != null && !currentGroup.getGroupAvatarImgPath().equals("")) {
-                    imageViewHeaderMainIcon.setImageBitmap(getAvatarBitmapFromPath(currentGroup.getGroupAvatarImgPath()));
+                if (currentUser.getUserAvatarImgPath() != null && !currentUser.getUserAvatarImgPath().equals("")) {
+                    imageViewHeaderMainIcon.setImageBitmap(getAvatarBitmapFromPath(currentUser.getUserAvatarImgPath()));
                 } else {
                     imageViewHeaderMainIcon.setImageDrawable(getApplicationContext().getDrawable(R.drawable.icon_default_camera_large));
                 }
