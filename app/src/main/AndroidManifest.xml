@@ -136,10 +136,6 @@
             android:label="@string/title_activity_settings"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.ImageAvatarChooserActivity"
-            android:label="@string/avatar_chooser"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".view.AboutActivity"
             android:label="@string/title_activity_about"
             android:theme="@style/AppTheme.NoActionBar"></activity>
