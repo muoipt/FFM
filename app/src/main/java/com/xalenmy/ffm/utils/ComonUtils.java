@@ -1,5 +1,6 @@
 package com.xalenmy.ffm.utils;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -9,6 +10,10 @@ import android.graphics.Matrix;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.parse.ParseFile;
 import com.parse.SaveCallback;
@@ -56,9 +61,6 @@ public class ComonUtils {
     public static final String UPDATE_REPORT_BUNDLE = "UPDATE_REPORT_BUNDLE";
     public static final String UPDATE_REPORT_INTENT = "UPDATE_REPORT_INTENT";
 
-    public static final String UPDATE_REPORT_BUNDLE_RESULT = "UPDATE_REPORT_BUNDLE_RESULT";
-    public static final String UPDATE_REPORT_INTENT_RESULT = "UPDATE_REPORT_INTENT_RESULT";
-
     public static final String SIGN_UP_ADMIN_BUNDLE = "SIGN_UP_ADMIN_BUNDLE";
     public static final String SIGN_UP_ADMIN_INTENT = "SIGN_UP_ADMIN_INTENT";
 
@@ -96,45 +98,6 @@ public class ComonUtils {
 
     public static final String SYNC_ALWAYS_SETTING = "SYNC_ALWAYS_SETTING";
 
-
-    public final static String ACTION_CATEGORY_UPDATE = "ACTION_CATEGORY_UPDATE";
-
-    public final static int CODE_SELECT_AVATAR_FROM_GALLERY = 10000;
-
-    public static final int CODE_LOG_IN = 1;
-    public static final int CODE_SIGN_UP = 2;
-    public static final int CODE_ADD_GROUP = 3;
-
-    public static final int CODE_ADD_CATEGORY = 4;
-    public static final int CODE_UPDATE_CATEGORY = 5;
-
-    public static final int CODE_ADD_REPORT = 6;
-    public static final int CODE_UPDATE_REPORT = 7;
-    public static final int CODE_UPDATE_REPORT_RESULT = 8;
-    public static final int CODE_FORGOT_PASSWORD = 9;
-
-    public static final int CODE_ADD_MEMBER_BY_ADMIN = 10;
-
-    public static final int CODE_EDIT_CAT_SEARCH = 11;
-    public static final int CODE_EDIT_CAT_MAIN = 12;
-    public static final int CODE_EDIT_USER_SEARCH = 13;
-    public static final int CODE_EDIT_REPORT_SEARCH = 14;
-
-    public static final int CODE_SELECT_AVATAR_FROM_GROUP = 15;
-    public static final int CODE_SELECT_AVATAR_FROM_CATEGORY = 16;
-    public static final int CODE_SELECT_AVATAR_FROM_MAIN = 17;
-    public static final int CODE_SELECT_AVATAR_FROM_USER = 18;
-    public static final int CODE_SELECT_AVATAR_FROM_GROUP_LIST = 19;
-
-    public static final int CODE_UPDATE_GROUP = 20;
-    public static final int CODE_ADD_GROUP_FROM_MAIN = 21;
-    public static final int CODE_ADD_GROUP_FROM_GROUP_LIST = 22;
-
-    public static final int CODE_ADD_ADMIN = 23;
-    public static final int CODE_UPDATE_ADMIN = 24;
-
-    public static List<Integer> deletedCategories = new ArrayList<Integer>();
-    public static List<Integer> deletedReports = new ArrayList<Integer>();
     public static final String ACTION_DELETE_REPORT = "ACTION_DELETE_REPORT";
     public static final String ACTION_DELETE_CATEGORY = "ACTION_DELETE_CATEGORY";
     public static final String ACTION_REFRESH_CAT_LIST = "ACTION_REFRESH_CAT_LIST";
@@ -144,12 +107,46 @@ public class ComonUtils {
     public static final String ACTION_ADD_GROUP_FROM_MAIN = "ACTION_ADD_GROUP_FROM_MAIN";
     public static final String ACTION_ADD_GROUP_FROM_GROUP_LIST = "ACTION_ADD_GROUP_FROM_GROUP_LIST";
     public static final String ACTION_ADD_USER_FROM_SETTING = "ACTION_ADD_USER_FROM_SETTING";
-
-    public static final String ACTION_CHANGE_FAB = "ACTION_CHANGE_FAB";
-
     public static final String ACTION_SHOW_REPORT = "action_show_report";
+    public static final String ACTION_OPEN_PROFILE_USER = "ACTION_OPEN_PROFILE_USER";
+    public static final String ACTION_APPROVE_USER = "ACTION_APPROVE_USER";
+    public static final String ACTION_REJECT_USER = "ACTION_REJECT_USER";
+    public static final String ACTION_REMOVE_USER = "ACTION_REMOVE_USER";
+    public static final String ACTION_AVATAR_FROM_GROUP = "ACTION_AVATAR_FROM_GROUP";
+    public static final String ACTION_AVATAR_FROM_USER = "ACTION_AVATAR_FROM_USER";
+    public static final String ACTION_AVATAR_FROM_CATEGORY = "ACTION_AVATAR_FROM_CATEGORY";
+    public static final String ACTION_AVATAR_FROM_MAIN = "ACTION_AVATAR_FROM_MAIN";
+    public static final String ACTION_AVATAR_FROM_GROUP_LIST = "ACTION_AVATAR_FROM_GROUP_LIST";
 
-    public static final int CODE_VIEW_LIST_MEMBER = 9;
+    public final static int CODE_SELECT_AVATAR_FROM_GALLERY = 10000;
+
+    public static final int CODE_LOG_IN = 1;
+    public static final int CODE_SIGN_UP = 2;
+    public static final int CODE_ADD_GROUP = 3;
+    public static final int CODE_ADD_CATEGORY = 4;
+    public static final int CODE_UPDATE_CATEGORY = 5;
+    public static final int CODE_ADD_REPORT = 6;
+    public static final int CODE_UPDATE_REPORT = 7;
+    public static final int CODE_UPDATE_REPORT_RESULT = 8;
+    public static final int CODE_FORGOT_PASSWORD = 9;
+    public static final int CODE_ADD_MEMBER_BY_ADMIN = 10;
+    public static final int CODE_EDIT_CAT_SEARCH = 11;
+    public static final int CODE_EDIT_CAT_MAIN = 12;
+    public static final int CODE_EDIT_REPORT_SEARCH = 14;
+    public static final int CODE_SELECT_AVATAR_FROM_GROUP = 15;
+    public static final int CODE_SELECT_AVATAR_FROM_CATEGORY = 16;
+    public static final int CODE_SELECT_AVATAR_FROM_MAIN = 17;
+    public static final int CODE_SELECT_AVATAR_FROM_USER = 18;
+    public static final int CODE_SELECT_AVATAR_FROM_GROUP_LIST = 19;
+    public static final int CODE_UPDATE_GROUP = 20;
+    public static final int CODE_ADD_GROUP_FROM_MAIN = 21;
+    public static final int CODE_ADD_GROUP_FROM_GROUP_LIST = 22;
+    public static final int CODE_ADD_ADMIN = 23;
+    public static final int CODE_UPDATE_ADMIN = 24;
+    public static final int CODE_VIEW_LIST_MEMBER = 25;
+
+    public static List<Integer> deletedCategories = new ArrayList<Integer>();
+    public static List<Integer> deletedReports = new ArrayList<Integer>();
 
     public static final int USER_STATUS_NEW = 0;
     public static final int USER_STATUS_NORMAL = 1;
@@ -158,21 +155,6 @@ public class ComonUtils {
 
     public static final int USER_ROLE_NORMAL = 0;
     public static final int USER_ROLE_ADMIN = 1;
-
-    public static final String ACTION_OPEN_PROFILE_USER = "ACTION_OPEN_PROFILE_USER";
-    public static final String ACTION_APPROVE_USER = "ACTION_APPROVE_USER";
-    public static final String ACTION_REJECT_USER = "ACTION_REJECT_USER";
-    public static final String ACTION_REMOVE_USER = "ACTION_REMOVE_USER";
-
-    public static final String ACTION_AVATAR_FROM_GROUP = "ACTION_AVATAR_FROM_GROUP";
-    public static final String ACTION_AVATAR_FROM_USER = "ACTION_AVATAR_FROM_USER";
-    public static final String ACTION_AVATAR_FROM_CATEGORY = "ACTION_AVATAR_FROM_CATEGORY";
-    public static final String ACTION_AVATAR_FROM_MAIN = "ACTION_AVATAR_FROM_MAIN";
-    public static final String ACTION_AVATAR_FROM_GROUP_LIST = "ACTION_AVATAR_FROM_GROUP_LIST";
-
-
-    public static final String TYPE_INCOME = "Income";
-    public static final String TYPE_OUTCOME = "Outcome";
 
     public static final String DISPLAY_COLOR_DIALOG = "DISPLAY_COLOR_DIALOG";
 
@@ -212,50 +194,6 @@ public class ComonUtils {
         }
 
         return -1;
-    }
-
-    public static String getCacheDirExternal() {
-        File dir = mContext.getCacheDir();
-        String dirPath = dir.getAbsolutePath();
-
-//        if (dir == null) {
-//            Log.e("PathInfo", "External cache directory is not available now");
-//        } else if (dir.exists()) {
-//            dirPath = dir.getAbsolutePath();
-//        } else {
-//            if (dir.mkdir()) {
-//                Log.e("PathInfo", "Failed to create external cache directory");
-//            } else {
-//                dirPath = dir.getAbsolutePath();
-//            }
-//        }
-
-        return dirPath;
-    }
-
-    public static boolean isGooglePhotosAvailable() {
-        boolean isValid = false;
-
-        PackageManager pm = mContext.getPackageManager();
-        try {
-            if (pm != null) {
-                String versionName = pm.getPackageInfo("com.google.android.apps.photos", PackageManager.GET_SERVICES).versionName;
-
-                if (versionName.compareTo("1.20") > 0) {
-                    isValid = true;
-                }
-            } else {
-                isValid = false;
-            }
-
-        } catch (PackageManager.NameNotFoundException e) {
-            isValid = false;
-        }
-        return isValid;
-    }
-
-    public static Bitmap getBitmap(int resId, BitmapFactory.Options opts) {
-        return BitmapFactory.decodeResource(mContext.getResources(), resId, opts);
     }
 
     public static boolean checkItemExistInList(String item, ArrayList<String> list) {
@@ -324,10 +262,6 @@ public class ComonUtils {
         }
 
         return date2;
-    }
-
-    public static Date getCurrentDatetime() {
-        return new Date();
     }
 
     public static String getCurrentWeek() {
@@ -505,5 +439,4 @@ public class ComonUtils {
 
         return photoFile;
     }
-
 }
