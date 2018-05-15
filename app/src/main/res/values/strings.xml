@@ -66,6 +66,7 @@
     <string name="title_activity_category_update">Update Category</string>
     <string name="title_activity_report_update">Update Report</string>
     <string name="title_activity_about">About</string>
+    <string name="title_activity_reset_password">Reset password</string>
 
 
     <!--add new category-->
@@ -129,8 +130,9 @@
     <string name="delete_category_question">Do you want to delete these Categories and all reports of these Categories ?</string>
 
     <string name="alert_login_info">You need to log in to use this function</string>
-    <string name="alert_internet_info">You need to conenct to the Internet to use this function</string>
-    <string name="alert_user_status_info">You need to be approved by admin to the Internet to use this function</string>
+    <string name="alert_internet_info">You need to connect to the Internet to use this function</string>
+    <string name="alert_user_status_info">You need to be approved by admin to use this function</string>
+    <string name="alert_function_not_support_info">Sorry, this function has not yet supported</string>
 
     <string name="search_hint">Input search text</string>
     <string name="search_action">SEARCH</string>

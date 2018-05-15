@@ -179,6 +179,9 @@
     <string name="alert_login_info">Bạn cần đăng nhập để sử dụng chức năng này</string>
     <string name="alert_internet_info">Bạn cần kết nối tới Internet để sử dụng chức năng này</string>
     <string name="alert_user_status_info">Bạn cần được admin duyệt để sử dụng chức năng này</string>
+    <string name="alert_function_not_support_info">Xin lỗi, chức năng này vẫn chưa được hỗ trợ</string>
+
+    <string name="title_activity_reset_password">Lấy lại mật khẩu</string>
 
 
 </resources>
