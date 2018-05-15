@@ -3,15 +3,19 @@ package com.xalenmy.ffm.view;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +35,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     private View mProgressView;
     private String email;
     private ResetPasswordTask mTask = null;
+    private Toolbar toolbar;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +47,19 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         getControlWidget();
+
+        toolbar = (Toolbar) findViewById(R.id.forgot_password_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationIcon(getDrawable(R.drawable.back_icon_36dp));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleOnBackPress();
+            }
+        });
+        toolbar.setTitle(getString(R.string.title_activity_reset_password));
 
         btn_reset_pass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,10 +110,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
     private void processResetPassword() {
-        showProgress(true);
-
-        mTask = new ResetPasswordTask();
-        mTask.execute((Void) null);
+        displayAlertDlg(3);
 
     }
 
@@ -137,7 +153,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 txt_reset_result_hint.setVisibility(View.VISIBLE);
 //                finish();
             } else {
-                Toast.makeText(getApplicationContext(), "Reset failed, try again", Toast.LENGTH_SHORT).show();
+                displayAlertDlg(3);
             }
         }
 
@@ -151,7 +167,40 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        toolbar.setBackgroundColor(AppConfig.getThemeColor());
         AppConfig.changeRoundViewColor(btn_reset_pass);
+    }
+
+    private void displayAlertDlg(int item) {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_sync_layout);
+        dialog.show();
+
+        ImageView img_sync = dialog.findViewById(R.id.img_sync);
+        img_sync.setImageResource(R.drawable.info_icon);
+        TextView txt_message = dialog.findViewById(R.id.txt_message);
+
+        if (item == 0) {
+            txt_message.setText(getString(R.string.alert_login_info));
+        } else if (item == 1) {
+            txt_message.setText(getString(R.string.alert_internet_info));
+        } else if (item == 2) {
+            txt_message.setText(getString(R.string.alert_user_status_info));
+        } else if (item == 3) {
+            txt_message.setText(getString(R.string.alert_function_not_support_info));
+        }
+
+        Button buttonOK = dialog.findViewById(R.id.btn_sync_ok);
+        AppConfig.changeRoundViewColor(buttonOK);
+        buttonOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    private void handleOnBackPress() {
+        this.finish();
     }
 }
