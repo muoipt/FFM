@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.xalenmy.ffm.view.CategoryAddNewActivity"
+    tools:context="com.muoipt.ffm.view.CategoryAddNewActivity"
     tools:showIn="@layout/activity_category_add_new">
 
     <LinearLayout
@@ -172,7 +172,7 @@
                     android:src="@drawable/money_icon"
                     android:background="@drawable/button_ripple_no_border" />
 
-                <com.xalenmy.ffm.utils.CircularImageView
+                <com.muoipt.ffm.utils.CircularImageView
                     android:id="@+id/imgBtnCatAvatarChoose"
                     android:layout_width="@dimen/dp_40"
                     android:layout_height="@dimen/dp_40"

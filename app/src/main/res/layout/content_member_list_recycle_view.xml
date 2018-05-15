@@ -20,7 +20,7 @@
         android:layout_alignParentLeft="true"
         android:orientation="horizontal">
 
-        <com.xalenmy.ffm.utils.CircularImageView
+        <com.muoipt.ffm.utils.CircularImageView
             android:id="@+id/member_item_img"
             android:layout_width="@dimen/member_item_img_width"
             android:layout_height="@dimen/member_item_img_width"

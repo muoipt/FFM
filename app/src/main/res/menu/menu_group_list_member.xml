@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.xalenmy.ffm.view.GroupListMemberActivity">
+    tools:context="com.muoipt.ffm.view.GroupListMemberActivity">
     <item
         android:id="@+id/action_approve"
         android:title="@string/action_approve" />

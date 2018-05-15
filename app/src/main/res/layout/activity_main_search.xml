@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.xalenmy.ffm.view.MainSearchActivity">
+    tools:context="com.muoipt.ffm.view.MainSearchActivity">
 
     <LinearLayout
         android:id="@+id/input_key_search_layout"

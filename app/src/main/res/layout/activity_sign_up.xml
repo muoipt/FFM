@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.xalenmy.ffm.view.SignUpActivity">
+    tools:context="com.muoipt.ffm.view.SignUpActivity">
 
     <ProgressBar
         android:id="@+id/signup_progress"
@@ -48,7 +48,7 @@
                     android:paddingBottom="@dimen/common_padding_minor"
                     android:paddingTop="@dimen/common_padding_minor">
 
-                    <com.xalenmy.ffm.utils.CircularImageView
+                    <com.muoipt.ffm.utils.CircularImageView
                         android:id="@+id/imgUserAvatar"
                         android:layout_width="@dimen/dp_120"
                         android:layout_height="@dimen/dp_120"
@@ -88,7 +88,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_password"
-                        android:imeActionId="@+id/signup"
                         android:imeActionLabel="@string/action_sign_up_short"
                         android:imeOptions="actionUnspecified"
                         android:maxLines="1" />
@@ -99,7 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.xalenmy.ffm.utils.CircularImageView
+                    <com.muoipt.ffm.utils.CircularImageView
                         android:id="@+id/imgNewGroup"
                         android:layout_width="@dimen/dp_50"
                         android:layout_height="@dimen/dp_50"
@@ -123,7 +122,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_group"
-                        android:imeActionId="@+id/signup"
                         android:imeActionLabel="@string/action_sign_up_short"
                         android:imeOptions="actionUnspecified"
                         android:maxLines="1" />

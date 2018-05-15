@@ -9,7 +9,7 @@
     android:paddingBottom="@dimen/dp_8"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <com.xalenmy.ffm.utils.CircularImageView
+    <com.muoipt.ffm.utils.CircularImageView
         android:id="@+id/imageViewHeaderMainIcon"
         android:layout_width="@dimen/img_header_main_icon_width"
         android:layout_height="@dimen/img_header_main_icon_height"

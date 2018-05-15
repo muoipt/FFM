@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.xalenmy.ffm.view.MainSummaryFragment">
+    tools:context="com.muoipt.ffm.view.MainSummaryFragment">
 
     <LinearLayout
         android:id="@+id/layout_recycle_view"

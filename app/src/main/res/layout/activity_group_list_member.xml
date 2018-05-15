@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.xalenmy.ffm.view.GroupListMemberActivity">
+    tools:context="com.muoipt.ffm.view.GroupListMemberActivity">
 
 
     <android.support.design.widget.AppBarLayout
@@ -25,7 +25,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             android:minHeight="@dimen/dp_100">
 
-            <com.xalenmy.ffm.utils.CircularImageView
+            <com.muoipt.ffm.utils.CircularImageView
                 android:id="@+id/imgGroupAvatar"
                 android:layout_width="@dimen/app_bar_main_img_banner_height"
                 android:layout_height="@dimen/app_bar_main_img_banner_height"

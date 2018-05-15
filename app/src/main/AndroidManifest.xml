@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xalenmy.ffm">
+    package="com.muoipt.ffm">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -12,10 +12,10 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <permission
-        android:name="com.xalenmy.ffm.permission.C2D_MESSAGE"
+        android:name="com.muoipt.ffm.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.xalenmy.ffm.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.muoipt.ffm.permission.C2D_MESSAGE" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -91,7 +91,7 @@
 
         <provider
             android:name=".database.FFMContentProvider"
-            android:authorities="com.xalenmy.ffm.ffmcontentprovider" />
+            android:authorities="com.muoipt.ffm.ffmcontentprovider" />
 
         <activity
             android:name=".view.MainSearchActivity"
@@ -111,7 +111,7 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-                <category android:name="com.xalenmy.ffm" />
+                <category android:name="com.muoipt.ffm" />
             </intent-filter>
         </receiver>
 

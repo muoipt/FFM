@@ -4,20 +4,20 @@ apply from: 'autodimension.gradle'
 android {
     signingConfigs {
         config {
-            keyAlias 'ffm_v3'
-            keyPassword 'ffm_v3'
-            storeFile file('D:/Projects/FFM/ffm_v3.jks')
-            storePassword 'ffm_v3'
+            keyAlias 'ffm_muoipt_v2'
+            keyPassword 'ffm_muoipt_v2'
+            storeFile file('D:/Projects/FFM/ffm_muoipt_v2')
+            storePassword 'ffm_muoipt_v2'
         }
     }
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
     defaultConfig {
-        applicationId "com.xalenmy.ffm"
+        applicationId "com.muoipt.ffm"
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode 3
-        versionName "3.0"
+        versionCode 2
+        versionName "2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

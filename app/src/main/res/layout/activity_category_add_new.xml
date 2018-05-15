@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.xalenmy.ffm.view.CategoryAddNewActivity">
+    tools:context="com.muoipt.ffm.view.CategoryAddNewActivity">
 
     <ProgressBar
         android:id="@+id/add_cat_progress"

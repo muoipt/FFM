@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.xalenmy.ffm.view.GroupAddNewActivity">
+    tools:context="com.muoipt.ffm.view.GroupAddNewActivity">
 
     <ProgressBar
         android:id="@+id/add_group_progress"
@@ -50,7 +50,7 @@
                     android:paddingBottom="@dimen/common_padding_minor"
                     android:paddingTop="@dimen/common_padding_minor">
 
-                    <com.xalenmy.ffm.utils.CircularImageView
+                    <com.muoipt.ffm.utils.CircularImageView
                         android:id="@+id/imgGroupAvatar"
                         android:layout_width="@dimen/dp_120"
                         android:layout_height="@dimen/dp_120"
@@ -72,7 +72,6 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:hint="@string/prompt_group"
-                        android:imeActionId="@+id/group_add_new"
                         android:imeActionLabel="@string/action_group_add_new"
                         android:imeOptions="actionUnspecified"
                         android:maxLines="1"

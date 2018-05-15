@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.xalenmy.ffm.view.ReportAddNewActivity">
+    tools:context="com.muoipt.ffm.view.ReportAddNewActivity">
 
     <ProgressBar
         android:id="@+id/add_report_progress"
@@ -63,7 +63,8 @@
                     android:text="@string/add_new_report_category_text"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/sp_16" />
+                    android:textSize="@dimen/sp_16"
+                    tools:ignore="RtlCompat" />
 
                 <EditText
                     android:id="@+id/editAddReportAmount"
