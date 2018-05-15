@@ -566,12 +566,10 @@ public class SignUpActivity extends AppCompatActivity {
                         fabGroup.setImageResource(groupAvatar);
                         imgNewGroup.setImageDrawable(getDrawable(groupAvatar));
                         userInputAvatar = groupAvatar;
-                        userInputAvatarImgPath = null;
                     } else if (groupAvatarImgPath != null && !groupAvatarImgPath.equals("")) {
                         fabGroup.setImageBitmap(getAvatarBitmapFromPath(groupAvatarImgPath));
                         imgNewGroup.setImageBitmap(getAvatarBitmapFromPath(groupAvatarImgPath));
                         userInputAvatar = -1;
-//                        userInputAvatarImgPath = groupAvatarImgPath;
                     }
                     mGroupView.setText(groupName);
                     signupRole = ComonUtils.USER_ROLE_ADMIN; //create group is admin role
@@ -590,12 +588,10 @@ public class SignUpActivity extends AppCompatActivity {
                         fabGroup.setImageResource(groupAvatar);
                         imgNewGroup.setImageDrawable(getDrawable(groupAvatar));
                         userInputAvatar = groupAvatar;
-                        userInputAvatarImgPath = null;
                     } else if (groupAvatarImgPath != null && groupAvatarImgPath != "") {
                         fabGroup.setImageBitmap(getAvatarBitmapFromPath(groupAvatarImgPath));
                         imgNewGroup.setImageBitmap(getAvatarBitmapFromPath(groupAvatarImgPath));
                         userInputAvatar = -1;
-                        userInputAvatarImgPath = groupAvatarImgPath;
                     }
                     mGroupView.setText(groupName);
                     signupRole = ComonUtils.USER_ROLE_ADMIN; //update group is admin role
