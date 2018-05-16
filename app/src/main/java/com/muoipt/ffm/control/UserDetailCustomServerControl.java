@@ -155,7 +155,7 @@ public class UserDetailCustomServerControl {
                 parseFile = ComonUtils.saveBitmapToFile(bitmap, userData.getUserAvatarImgPath());
             }
 
-            user.put(DatabaseUtils.USER_AVATAR_IMG_FILE, parseFile);
+            user.put(DatabaseUtils.USER_AVATAR_IMG_FILE_SERVER, parseFile);
         }
 
         user.saveInBackground(new SaveCallback() {
@@ -223,9 +223,22 @@ public class UserDetailCustomServerControl {
                 int logInUserId = object.getInt(DatabaseUtils.COLUMN_USER_ID);
                 int logInGroupId = object.getInt(DatabaseUtils.COLUMN_USER_GROUP_ID);
                 int logInUserAvatar = object.getInt(DatabaseUtils.COLUMN_USER_AVATAR);
-                String logInUserAvatarImgPath = object.getString(DatabaseUtils.COLUMN_USER_AVATAR_IMG_PATH);
+//                String logInUserAvatarImgPath = object.getString(DatabaseUtils.COLUMN_USER_AVATAR_IMG_PATH);
                 int logInUserStatus = object.getInt(DatabaseUtils.COLUMN_USER_STATUS);
                 int logInUserRole = object.getInt(DatabaseUtils.COLUMN_USER_ROLE);
+
+                ParseFile imgAvatarFile = object.getParseFile(DatabaseUtils.USER_AVATAR_IMG_FILE_SERVER);
+
+                String logInUserAvatarImgPath = null;
+                if (imgAvatarFile != null && !imgAvatarFile.equals("")) {
+                    //save file to cache and then set path to group
+                    File savedFile = new File(mContext.getExternalCacheDir(), ComonUtils.createNewCacheUserFileName());
+
+                    ComonUtils.copyInputStreamToFile(imgAvatarFile.getDataStream(), savedFile);
+
+                    logInUserAvatarImgPath = savedFile.getAbsolutePath();
+                }
+
                 user = new UserDetail();
                 user.setUserId(logInUserId);
                 user.setUserGroupId(logInGroupId);
@@ -293,6 +306,53 @@ public class UserDetailCustomServerControl {
         }
     }
 
+    public boolean updateUserToServer(UserDetail u) {
+
+        final boolean[] res = {true};
+
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(DatabaseUtils.TABLE_USER);
+        query.whereEqualTo(DatabaseUtils.COLUMN_USER_EMAIL, u.getUserEmail());
+
+        try {
+            ParseObject user = query.getFirst();
+            if (user != null) {
+                user.put(DatabaseUtils.COLUMN_USER_EMAIL, u.getUserEmail());
+                user.put(DatabaseUtils.COLUMN_USER_PASSWORD, u.getUserPassword());
+                user.put(DatabaseUtils.COLUMN_USER_GROUP_ID, u.getUserGroupId());
+                user.put(DatabaseUtils.COLUMN_USER_AVATAR, u.getUserAvatar());
+                if (u.getUserAvatarImgPath() == null) {
+                    user.put(DatabaseUtils.COLUMN_USER_AVATAR_IMG_PATH, "");
+                } else {
+                    user.put(DatabaseUtils.COLUMN_USER_AVATAR_IMG_PATH, u.getUserAvatarImgPath());
+                }
+                user.put(DatabaseUtils.COLUMN_USER_STATUS, u.getUserStatus());
+                user.put(DatabaseUtils.COLUMN_USER_ROLE, u.getUserRole());
+
+                ParseFile parseFile = null;
+                if (u.getUserAvatarImgPath() != null && !u.getUserAvatarImgPath().equals("")) {
+                    Bitmap bitmap = getAvatarBitmapFromPath(u.getUserAvatarImgPath());
+                    if (bitmap != null) {
+                        parseFile = ComonUtils.saveBitmapToFile(bitmap, u.getUserAvatarImgPath());
+                    }
+                    user.put(DatabaseUtils.USER_AVATAR_IMG_FILE_SERVER, parseFile);
+                }
+                try {
+                    user.save();
+                    Log.i("updateUser", "updateUser successful");
+                } catch (Exception e) {
+                    Log.i("updateUser", "updateUser failed");
+                    res[0] = false;
+                }
+
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return res[0];
+    }
+
     public boolean updateUserToServer(List<UserDetail> userChangedList) {
 
         final boolean[] res = {true};
@@ -323,7 +383,7 @@ public class UserDetailCustomServerControl {
                         if (bitmap != null) {
                             parseFile = ComonUtils.saveBitmapToFile(bitmap, u.getUserAvatarImgPath());
                         }
-                        user.put(DatabaseUtils.USER_AVATAR_IMG_FILE, parseFile);
+                        user.put(DatabaseUtils.USER_AVATAR_IMG_FILE_SERVER, parseFile);
                     }
                     try {
                         user.save();

@@ -23,8 +23,10 @@ import com.muoipt.ffm.model.ReportDetail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -117,6 +119,7 @@ public class ComonUtils {
     public static final String ACTION_AVATAR_FROM_CATEGORY = "ACTION_AVATAR_FROM_CATEGORY";
     public static final String ACTION_AVATAR_FROM_MAIN = "ACTION_AVATAR_FROM_MAIN";
     public static final String ACTION_AVATAR_FROM_GROUP_LIST = "ACTION_AVATAR_FROM_GROUP_LIST";
+    public static final String ACTION_USER_LOGIN_FROM_NAV = "ACTION_USER_LOGIN_FROM_NAV";
 
     public final static int CODE_SELECT_AVATAR_FROM_GALLERY = 10000;
 
@@ -144,6 +147,7 @@ public class ComonUtils {
     public static final int CODE_ADD_ADMIN = 23;
     public static final int CODE_UPDATE_ADMIN = 24;
     public static final int CODE_VIEW_LIST_MEMBER = 25;
+    public static final int CODE_USER_LOGIN_FROM_NAV = 26;
 
     public static List<Integer> deletedCategories = new ArrayList<Integer>();
     public static List<Integer> deletedReports = new ArrayList<Integer>();
@@ -409,10 +413,22 @@ public class ComonUtils {
         return srcBitmap;
     }
 
-    public static String createNewCacheFileName() {
+    public static String createNewCacheGroupFileName() {
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
-        return dateFormat.format(date) + "." + Bitmap.CompressFormat.JPEG.toString();
+        return "group_" + dateFormat.format(date) + "." + Bitmap.CompressFormat.JPEG.toString();
+    }
+
+    public static String createNewCacheUserFileName() {
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        return "user_" + dateFormat.format(date) + "." + Bitmap.CompressFormat.JPEG.toString();
+    }
+
+    public static String createNewCacheCatFileName() {
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        return "cat_" + dateFormat.format(date) + "." + Bitmap.CompressFormat.JPEG.toString();
     }
 
     public static ParseFile saveBitmapToFile(Bitmap b, String path) {
@@ -438,5 +454,39 @@ public class ComonUtils {
         });
 
         return photoFile;
+    }
+
+    public static void copyInputStreamToFile(InputStream in, File file) {
+        OutputStream out = null;
+
+        try {
+            out = new FileOutputStream(file);
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Ensure that the InputStreams are closed even if there's an exception.
+            try {
+                if (out != null) {
+                    out.close();
+                }
+
+                // If you want to close the "in" InputStream yourself then remove this
+                // from here but ensure that you close it yourself eventually.
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void deleteUnusedFile(String path){
+        //delete avatar img in cache
+        File file = new File(path);
+        file.delete();
     }
 }

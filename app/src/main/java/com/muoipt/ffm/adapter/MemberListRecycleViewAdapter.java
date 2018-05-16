@@ -62,12 +62,12 @@ public class MemberListRecycleViewAdapter extends RecyclerView.Adapter<MemberLis
 
         AppConfig.changeRoundViewColor(holder.img);
 
-        int groupAvatar = list.get(position).getUserAvatar();
-        String groupAvatarImgPath = list.get(position).getUserAvatarImgPath();
-        if(groupAvatarImgPath != null && !groupAvatarImgPath.equals("")){
-            holder.img.setImageBitmap(getAvatarBitmapFromPath(groupAvatarImgPath));
-        } else if(groupAvatar != -1){
-            holder.img.setImageDrawable(context.getDrawable(groupAvatar));
+        int userAvatar = list.get(position).getUserAvatar();
+        String userAvatarImgPath = list.get(position).getUserAvatarImgPath();
+        if(userAvatarImgPath != null && !userAvatarImgPath.equals("")){
+            holder.img.setImageBitmap(getAvatarBitmapFromPath(userAvatarImgPath));
+        } else if(userAvatar != -1){
+            holder.img.setImageDrawable(context.getDrawable(userAvatar));
         }
 
         holder.group_item_container.setOnClickListener(new View.OnClickListener() {

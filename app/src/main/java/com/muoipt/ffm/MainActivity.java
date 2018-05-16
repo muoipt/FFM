@@ -52,6 +52,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.muoipt.ffm.control.UserDetailCustomServerControl;
+import com.muoipt.ffm.view.SignUpActivity;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.muoipt.ffm.adapter.CatListviewAdapter;
@@ -133,6 +135,7 @@ public class MainActivity extends AppCompatActivity
     private GroupDetailControl groupDetailDBControl;
     private GroupDetailServerControl groupDetailServerControl;
     private UserDetailControl userDetailControl;
+    private UserDetailCustomServerControl userDetailCustomServerControl;
     private boolean isNoNeedToRefreshMainSummaryRecyle = true;
     private boolean isNoNeedToRefreshMainReportRecyle = true;
     private boolean isNoNeedToRefreshcatlist = true;
@@ -325,6 +328,7 @@ public class MainActivity extends AppCompatActivity
         groupDetailDBControl = new GroupDetailControl(this);
         groupDetailServerControl = new GroupDetailServerControl(this);
         userDetailControl = new UserDetailControl(this);
+        userDetailCustomServerControl = new UserDetailCustomServerControl(this);
 
         syncReceiver = new SyncReceiver();
         IntentFilter intentFilter = new IntentFilter();
@@ -518,7 +522,8 @@ public class MainActivity extends AppCompatActivity
                 }
                 break;
             case R.id.imageViewHeaderMainIcon:
-                processMyGroup();
+//                processMyGroup();
+                processUserAvatar();
 //                processChangeUserAvatar();
 //                processChangeGroupAvatar();
                 break;
@@ -713,7 +718,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == ComonUtils.CODE_SELECT_AVATAR_FROM_MAIN) {
-            processUpdateAvatar(data, true);
+            processUpdateUserAvatar(data, true);
         }
 
         switch (resultCode) {
@@ -1210,6 +1215,31 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    private void processUserAvatar() {
+//        if (currentUser.getUserEmail() != null || currentGroup.getGroupAvatarImgPath() != null) {
+//            processChangeGroupAvatar();
+//        } else {
+//            Intent newGroupIntent = new Intent(this, GroupAddNewActivity.class);
+//            newGroupIntent.setAction(ComonUtils.ACTION_ADD_GROUP_FROM_MAIN);
+//            startActivityForResult(newGroupIntent, ComonUtils.CODE_ADD_GROUP_FROM_MAIN);
+//        }
+        //TH user chua dang nhap
+        if (currentUser.getUserEmail() == null) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivityForResult(intent, ComonUtils.CODE_LOG_IN);
+        } else {
+//            processChangeGroupAvatar();
+            processChangeUserAvatar();
+        }
+
+
+    }
+
+    private void processChangeUserAvatar() {
+        ActivityCompat.requestPermissions(this,
+                new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+    }
+
 
     private void processChangeGroupAvatar() {
 
@@ -1247,8 +1277,8 @@ public class MainActivity extends AppCompatActivity
     public void doChangeGroupAvatar(GroupImgPathEventObj obj) {
         if (obj.getMsg().equals("MAIN_GROUP_AVATAR_IMG_PATH")) {
             String imgPath = obj.getImgPath();
-            if (imgPath != null && imageViewHeaderMainIcon != null)
-                imageViewHeaderMainIcon.setImageBitmap(getAvatarBitmapFromPath(imgPath));
+//            if (imgPath != null && imageViewHeaderMainIcon != null)
+//                imageViewHeaderMainIcon.setImageBitmap(getAvatarBitmapFromPath(imgPath));
 
             GroupDetail currentGroup = groupDetailDBControl.findGroupById(currentUser.getUserGroupId());
             currentGroup.setGroupAvatar(obj.getAvatarId());
@@ -1264,8 +1294,8 @@ public class MainActivity extends AppCompatActivity
         Bundle bundle = intent.getBundleExtra(ComonUtils.NEW_GROUP_INTENT);
         if (bundle != null) {
             GroupDetail groupDetail = (GroupDetail) bundle.getSerializable(ComonUtils.NEW_GROUP_BUNDLE);
-            if (imageViewHeaderMainIcon != null && groupDetail.getGroupAvatarImgPath() != null && !groupDetail.getGroupAvatarImgPath().equals(""))
-                imageViewHeaderMainIcon.setImageBitmap(getAvatarBitmapFromPath(groupDetail.getGroupAvatarImgPath()));
+//            if (imageViewHeaderMainIcon != null && groupDetail.getGroupAvatarImgPath() != null && !groupDetail.getGroupAvatarImgPath().equals(""))
+//                imageViewHeaderMainIcon.setImageBitmap(getAvatarBitmapFromPath(groupDetail.getGroupAvatarImgPath()));
             txtHeaderMainGroupName.setText(groupDetail.getGroupName());
             currentGroup = new GroupDetail(groupDetail.getGroupId(), groupDetail.getGroupName(), groupDetail.getGroupAvatarImgPath());
             AppConfig.saveGroupInfoToSharePreference(currentGroup);
@@ -1273,7 +1303,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void processUpdateAvatar(Intent data, boolean isUpdateIcon) {
+    private void processUpdateUserAvatar(Intent data, boolean isUpdateIcon) {
         if (data == null) return;
         Uri selectedImage = data.getData();
         String imgPath = null;
@@ -1283,7 +1313,7 @@ public class MainActivity extends AppCompatActivity
             if (imageViewHeaderMainIcon != null)
                 imageViewHeaderMainIcon.setImageBitmap(bitmap);
 
-            File savedFile = new File(getExternalCacheDir(), ComonUtils.createNewCacheFileName());
+            File savedFile = new File(getExternalCacheDir(), ComonUtils.createNewCacheUserFileName());
             try {
                 FileOutputStream out = new FileOutputStream(savedFile);
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
@@ -1299,29 +1329,16 @@ public class MainActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        if (isUpdateIcon) {
-            ArrayList<GroupDetail> groupDetails = new ArrayList<GroupDetail>();
-            if (currentUser.getUserEmail() != null) {
-                GroupDetail group = groupDetailDBControl.findGroupById(currentUser.getUserGroupId());
-                group.setGroupAvatarImgPath(imgPath);
-                //update on DB
-                groupDetailDBControl.updateGroup(group);
-                //update on server
-                groupDetails.add(group);
-                //update on share preference
-                AppConfig.saveGroupInfoToSharePreference(group);
-            } else if (currentGroup.getGroupId() != -1) {
-                currentGroup.setGroupAvatarImgPath(imgPath);
-                groupDetailDBControl.updateGroup(currentGroup);
-                groupDetails.add(currentGroup);
-                AppConfig.saveGroupInfoToSharePreference(currentGroup);
-            }
+        if (isUpdateIcon && imgPath != null & !imgPath.equals("")) {
+            //update on DB
+            currentUser.setUserAvatarImgPath(imgPath);
+            userDetailControl.updateUser(currentUser);
+            //update on server
+            userDetailCustomServerControl.updateUserToServer(currentUser);
+            //update on share pref
+            AppConfig.saveUserInfoToSharePreference(currentUser);
 
-            if (groupDetailServerControl.updateGroupToServer(groupDetails)) {
-                Toast.makeText(this, "Update group avatar successfull", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(this, "Update group avatar failed", Toast.LENGTH_LONG).show();
-            }
+            Toast.makeText(this, "Update user avatar successfully", Toast.LENGTH_LONG).show();
         }
     }
 

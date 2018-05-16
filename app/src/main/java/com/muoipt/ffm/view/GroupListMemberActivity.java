@@ -604,7 +604,7 @@ public class GroupListMemberActivity extends AppCompatActivity {
                     Bitmap bitmap = ComonUtils.getCorrectlyOrientedImage(this, selectedImage);
                     imgGroupAvatar.setImageBitmap(bitmap);
 
-                    File savedFile = new File(getExternalCacheDir(), ComonUtils.createNewCacheFileName());
+                    File savedFile = new File(getExternalCacheDir(), ComonUtils.createNewCacheGroupFileName());
                     try {
                         FileOutputStream out = new FileOutputStream(savedFile);
                         bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);

@@ -37,6 +37,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -341,15 +342,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         //save group to DB
         GroupDetailControl groupDetailDBControl = new GroupDetailControl(this);
         GroupDetailServerControl groupDetailServerControl = new GroupDetailServerControl(this);
-        GroupDetail group = groupDetailServerControl.getLogInGroupFromServer(logInUser);
+        GroupDetail group = groupDetailServerControl.getGroupServerDataById(logInUser.getUserGroupId());
 
-        if (!groupDetailDBControl.checkDataGroupExistInDb(group.getGroupName())) {
+        GroupDetail groupDB = groupDetailDBControl.checkDataGroupExistInDb(group.getGroupName());
+        if (groupDB == null) {
             groupDetailDBControl.addGroup(group);
+        } else {
+            //delete avatar img in cache
+            ComonUtils.deleteUnusedFile(group.getGroupAvatarImgPath());
         }
 
         //save user to db
-        if (!userDetailDbControl.checkDataUserExistInDb(logInUser.getUserEmail())) {
+        UserDetail userDB = userDetailDbControl.checkDataUserExistInDb(logInUser.getUserEmail());
+        if (userDB == null) {
             userDetailDbControl.addUser(logInUser);
+        } else {
+            //delete avatar img in cache
+            ComonUtils.deleteUnusedFile(logInUser.getUserAvatarImgPath());
+            logInUser.setUserAvatarImgPath(userDB.getUserAvatarImgPath());
         }
     }
 
@@ -385,7 +395,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 //        actionBar.setBackgroundDrawable(new ColorDrawable(AppConfig.getThemeColor()));
     }
 
-    public boolean autoLogInUser(String email, String password){
+    public boolean autoLogInUser(String email, String password) {
 
         UserDetailServerControl control = new UserDetailServerControl(this);
         if (!control.logIn(email, password)) {

@@ -29,22 +29,22 @@ public class GroupDetailControl {
         return isExist;
     }
 
-    public boolean checkDataGroupExistInDb(String name){
+    public GroupDetail checkDataGroupExistInDb(String name){
         databaseUtils.open();
 
         ArrayList<GroupDetail> groups = getAllGroupsFromDB();
         if(groups == null)
-            return false;
+            return null;
 
         for(int i=0; i<groups.size(); i++){
             if(groups.get(i).getGroupName().equals(name)){
-                return true;
+                return groups.get(i);
             }
         }
 
         databaseUtils.close();
 
-        return false;
+        return null;
     }
 
     public boolean createTableGroup(){

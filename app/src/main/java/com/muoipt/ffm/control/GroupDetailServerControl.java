@@ -24,6 +24,7 @@ import com.muoipt.ffm.utils.SyncUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +81,7 @@ public class GroupDetailServerControl {
         final boolean[] res = {true};
 
         ParseFile parseFile = null;
-        if(g.getGroupAvatarImgPath() != null && !g.getGroupAvatarImgPath().equals("")) {
+        if (g.getGroupAvatarImgPath() != null && !g.getGroupAvatarImgPath().equals("")) {
             Bitmap bitmap = getAvatarBitmapFromPath(g.getGroupAvatarImgPath());
             if (bitmap != null) {
                 parseFile = ComonUtils.saveBitmapToFile(bitmap, g.getGroupAvatarImgPath());
@@ -236,7 +237,6 @@ public class GroupDetailServerControl {
     }
 
     public GroupDetail getGroupServerDataById(int id) {
-//        SyncUtils.connectAutoUserToParseServer();
 
         GroupDetail group = null;
 
@@ -249,7 +249,21 @@ public class GroupDetailServerControl {
                 int groupId = object.getInt(DatabaseUtils.COLUMN_GROUP_ID);
                 String groupName = object.getString(DatabaseUtils.COLUMN_GROUP_NAME);
                 int groupAvatar = object.getInt(DatabaseUtils.COLUMN_GROUP_AVATAR);
-                group = new GroupDetail(groupId, groupName, groupAvatar);
+                String avatarImgPath = null;
+
+                ParseFile imgAvatarFile = object.getParseFile(DatabaseUtils.GROUP_AVATAR_IMG_FILE_SERVER);
+
+                if (imgAvatarFile != null && !imgAvatarFile.equals("")) {
+                    //save file to cache and then set path to group
+                    File savedFile = new File(mContext.getExternalCacheDir(), ComonUtils.createNewCacheGroupFileName());
+
+                    ComonUtils.copyInputStreamToFile(imgAvatarFile.getDataStream(), savedFile);
+
+                    avatarImgPath = savedFile.getAbsolutePath();
+                }
+
+                group = new GroupDetail(groupId, groupName, groupAvatar, avatarImgPath);
+
             }
         } catch (ParseException e) {
             e.printStackTrace();

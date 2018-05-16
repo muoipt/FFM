@@ -686,7 +686,7 @@ public class CategoryAddNewActivity extends AppCompatActivity implements View.On
                 Bitmap bitmap = ComonUtils.getCorrectlyOrientedImage(this, selectedImage);
                 imgAvatarChoose.setImageBitmap(bitmap);
 
-                File savedFile = new File(getExternalCacheDir(), ComonUtils.createNewCacheFileName());
+                File savedFile = new File(getExternalCacheDir(), ComonUtils.createNewCacheCatFileName());
                 try {
                     FileOutputStream out = new FileOutputStream(savedFile);
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);

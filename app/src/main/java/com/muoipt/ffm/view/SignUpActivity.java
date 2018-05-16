@@ -536,7 +536,7 @@ public class SignUpActivity extends AppCompatActivity {
                 Bitmap bitmap = ComonUtils.getCorrectlyOrientedImage(this, selectedImage);
                 imgUserAvatar.setImageBitmap(bitmap);
 
-                File savedFile = new File(getExternalCacheDir(), ComonUtils.createNewCacheFileName());
+                File savedFile = new File(getExternalCacheDir(), ComonUtils.createNewCacheUserFileName());
                 try {
                     FileOutputStream out = new FileOutputStream(savedFile);
                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);

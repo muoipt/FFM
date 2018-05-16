@@ -76,7 +76,7 @@ public class DatabaseUtils extends SQLiteOpenHelper {
     public static final String COLUMN_USER_AVATAR_IMG_PATH = "userAvatarImgPath";
     public static final String COLUMN_USER_STATUS = "userStatus";
     public static final String COLUMN_USER_ROLE = "userRole";
-    public static final String USER_AVATAR_IMG_FILE = "userAvatarImgFile";
+    public static final String USER_AVATAR_IMG_FILE_SERVER = "userAvatarImgFile";
 
     public static final String TABLE_ID_DATA = "IdDataTbl";
     public static final String COLUMN_ID_DATA_ID = "idData";

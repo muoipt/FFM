@@ -100,16 +100,16 @@ public class UserDetailControl {
         return true;
     }
 
-    public boolean checkDataUserExistInDb(String email) {
+    public UserDetail checkDataUserExistInDb(String email) {
         ArrayList<UserDetail> users = getAllUsersFromDB();
 
         for(int i=0; i<users.size(); i++){
             if(users.get(i).getUserEmail().equals(email)){
-                return true;
+                return users.get(i);
             }
         }
 
-        return false;
+        return null;
     }
 
     public int getGroupIdFromUser(UserDetail user) {
