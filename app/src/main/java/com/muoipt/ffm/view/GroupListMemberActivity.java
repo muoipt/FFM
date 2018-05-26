@@ -205,8 +205,8 @@ public class GroupListMemberActivity extends AppCompatActivity {
         });
 
         initExtendNewList();
-        initExtendNewList();
-        initExtendNewList();
+        initExtendActiveList();
+        initExtendRemovedList();
 
     }
 
@@ -241,9 +241,9 @@ public class GroupListMemberActivity extends AppCompatActivity {
 
         userChangedList = new ArrayList<UserDetail>();
 
-        initExtendNewList();
-        initExtendActiveList();
-        initExtendRemovedList();
+//        initExtendNewList();
+//        initExtendActiveList();
+//        initExtendRemovedList();
     }
 
 
@@ -438,6 +438,7 @@ public class GroupListMemberActivity extends AppCompatActivity {
             btnExtentCurrent.setBackgroundResource(R.drawable.ic_arrow_drop_up_black);
             btnExtentCurrent.setVisibility(View.VISIBLE);
             txtDiv7.setVisibility(View.VISIBLE);
+            txtDiv6.setVisibility(View.VISIBLE);
         } else {
             txtDiv7.setVisibility(View.GONE);
         }
@@ -479,10 +480,11 @@ public class GroupListMemberActivity extends AppCompatActivity {
         if (recyclerViewActiveUser.getVisibility() == View.VISIBLE) {
             recyclerViewActiveUser.setVisibility(View.GONE);
             btnExtentCurrent.setBackgroundResource(R.drawable.ic_arrow_drop_down_black);
-            txtDiv6.setVisibility(View.GONE);
+            txtDiv7.setVisibility(View.GONE);
         } else {
             recyclerViewActiveUser.setVisibility(View.VISIBLE);
             btnExtentCurrent.setBackgroundResource(R.drawable.ic_arrow_drop_up_black);
+            txtDiv7.setVisibility(View.VISIBLE);
             txtDiv6.setVisibility(View.VISIBLE);
         }
     }
@@ -657,13 +659,14 @@ public class GroupListMemberActivity extends AppCompatActivity {
         }
     }
 
-    private void displayAlertDlg(int item) {
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void displayAlertDlg(final int item) {
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_sync_layout);
         dialog.show();
 
         ImageView img_sync = dialog.findViewById(R.id.img_sync);
-        img_sync.setImageResource(R.drawable.info_icon);
+        img_sync.setImageResource(R.drawable.error_icon);
         TextView txt_message = dialog.findViewById(R.id.txt_message);
 
         if (item == 0) {
@@ -676,9 +679,14 @@ public class GroupListMemberActivity extends AppCompatActivity {
 
         Button buttonOK = dialog.findViewById(R.id.btn_sync_ok);
         AppConfig.changeRoundViewColor(buttonOK);
+        buttonOK.setTextColor(AppConfig.getThemeColor());
         buttonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(item == 0){
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivityForResult(intent, ComonUtils.CODE_LOG_IN);
+                }
                 dialog.dismiss();
             }
         });

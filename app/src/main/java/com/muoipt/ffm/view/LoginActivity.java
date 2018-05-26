@@ -30,6 +30,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -120,6 +121,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    mEmailSignInButton.requestFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(mPasswordView.getWindowToken(), 0);
+
+                    attemptLogin();
+
+                    return true;
+                }
+
+                return false;
+            }
+        });
 
     }
 
@@ -183,6 +200,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         if (cancel) {
             focusView.requestFocus();
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(focusView, 0);
         } else {
             showProgress(true);
             mAuthTask = new UserLoginTask(logInEmail, logInPassword);
@@ -211,6 +230,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             }
         });
+
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mPasswordView.getWindowToken(), 0);
     }
 
     @Override
@@ -311,8 +333,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Toast.makeText(mContext, "Log in sucessfully", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(mPasswordView, 0);
+
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
+
             }
         }
 
@@ -352,14 +378,31 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             ComonUtils.deleteUnusedFile(group.getGroupAvatarImgPath());
         }
 
-        //save user to db
+        //save current user to db
         UserDetail userDB = userDetailDbControl.checkDataUserExistInDb(logInUser.getUserEmail());
         if (userDB == null) {
             userDetailDbControl.addUser(logInUser);
         } else {
             //delete avatar img in cache
-            ComonUtils.deleteUnusedFile(logInUser.getUserAvatarImgPath());
-            logInUser.setUserAvatarImgPath(userDB.getUserAvatarImgPath());
+            if (logInUser.getUserAvatarImgPath() != null && !logInUser.getUserAvatarImgPath().equals("")) {
+                ComonUtils.deleteUnusedFile(logInUser.getUserAvatarImgPath());
+//                logInUser.setUserAvatarImgPath(userDB.getUserAvatarImgPath());
+            }
+        }
+
+        //also save all other members in current group to DB
+        List<UserDetail> usersListOnServer = userDetailCustomServerControl.getUserInCurrentGroupServer(logInUser.getUserGroupId());
+        if (usersListOnServer != null && usersListOnServer.size() > 0) {
+            for (int i = 0; i < usersListOnServer.size(); i++) {
+                UserDetail u = userDetailDbControl.checkDataUserExistInDb(usersListOnServer.get(i).getUserEmail());
+                if (u == null) {
+                    userDetailDbControl.addUser(usersListOnServer.get(i));
+                } else {
+                    if (usersListOnServer.get(i).getUserAvatarImgPath() != null && !usersListOnServer.get(i).getUserAvatarImgPath().equals("")) {
+                        ComonUtils.deleteUnusedFile(usersListOnServer.get(i).getUserAvatarImgPath());
+                    }
+                }
+            }
         }
     }
 
@@ -392,7 +435,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailView.setBackgroundTintList(ColorStateList.valueOf(getColor(AppConfig.current_theme_setting_color)));
         mPasswordView.setBackgroundTintList(ColorStateList.valueOf(getColor(AppConfig.current_theme_setting_color)));
 
-//        actionBar.setBackgroundDrawable(new ColorDrawable(AppConfig.getThemeColor()));
+        mEmailSignInButton.setTextColor(AppConfig.getThemeColor());
+
     }
 
     public boolean autoLogInUser(String email, String password) {

@@ -99,6 +99,52 @@ public class UserDetailCustomServerControl {
         return usersServer;
     }
 
+    public ArrayList<UserDetail> getUserInCurrentGroupServer(int groupId) {
+        ArrayList<UserDetail> usersServer = null;
+
+        ParseQuery<ParseObject> query3 = ParseQuery.getQuery(DatabaseUtils.TABLE_USER);
+        query3.whereEqualTo(DatabaseUtils.COLUMN_USER_GROUP_ID, groupId);
+
+        try {
+            List<ParseObject> objects = query3.find();
+            if (objects != null) {
+                usersServer = new ArrayList<UserDetail>();
+                for (int i = 0; i < objects.size(); i++) {
+                    int userId = objects.get(i).getInt(DatabaseUtils.COLUMN_USER_ID);
+                    String userEmail = objects.get(i).getString(DatabaseUtils.COLUMN_USER_EMAIL);
+                    String userPassword = objects.get(i).getString(DatabaseUtils.COLUMN_USER_PASSWORD);
+                    int userGroupId = objects.get(i).getInt(DatabaseUtils.COLUMN_USER_GROUP_ID);
+                    int userAvatar = objects.get(i).getInt(DatabaseUtils.COLUMN_USER_AVATAR);
+                    String userAvatarImgPath = objects.get(i).getString(DatabaseUtils.COLUMN_USER_AVATAR_IMG_PATH);
+                    int userStatus = objects.get(i).getInt(DatabaseUtils.COLUMN_USER_STATUS);
+                    int userRole = objects.get(i).getInt(DatabaseUtils.COLUMN_USER_ROLE);
+
+                    ParseFile imgAvatarFile = objects.get(i).getParseFile(DatabaseUtils.USER_AVATAR_IMG_FILE_SERVER);
+
+                    String logInUserAvatarImgPath = null;
+                    if (imgAvatarFile != null && imgAvatarFile.getDataStream() != null) {
+                        //save file to cache and then set path to group
+                        File savedFile = new File(mContext.getExternalCacheDir(), ComonUtils.createNewCacheUserFileName());
+
+                        try {
+                            ComonUtils.copyInputStreamToFile(imgAvatarFile.getDataStream(), savedFile);
+                        } catch (ParseException e1) {
+                            e1.printStackTrace();
+                        }
+
+                        logInUserAvatarImgPath = savedFile.getAbsolutePath();
+                    }
+
+                    UserDetail user = new UserDetail(userId, userEmail, userPassword, userGroupId, userAvatar, logInUserAvatarImgPath, userStatus, userRole);
+                    usersServer.add(user);
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return usersServer;
+    }
+
     public boolean checkDataUserExistInServer(String email) {
         final boolean[] res = {false};
 
@@ -230,7 +276,7 @@ public class UserDetailCustomServerControl {
                 ParseFile imgAvatarFile = object.getParseFile(DatabaseUtils.USER_AVATAR_IMG_FILE_SERVER);
 
                 String logInUserAvatarImgPath = null;
-                if (imgAvatarFile != null && !imgAvatarFile.equals("")) {
+                if (imgAvatarFile != null && imgAvatarFile.getDataStream() != null) {
                     //save file to cache and then set path to group
                     File savedFile = new File(mContext.getExternalCacheDir(), ComonUtils.createNewCacheUserFileName());
 

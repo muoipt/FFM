@@ -164,6 +164,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onResume() {
         super.onResume();
@@ -171,13 +172,14 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         AppConfig.changeRoundViewColor(btn_reset_pass);
     }
 
-    private void displayAlertDlg(int item) {
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void displayAlertDlg(final int item) {
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_sync_layout);
         dialog.show();
 
         ImageView img_sync = dialog.findViewById(R.id.img_sync);
-        img_sync.setImageResource(R.drawable.info_icon);
+        img_sync.setImageResource(R.drawable.error_icon);
         TextView txt_message = dialog.findViewById(R.id.txt_message);
 
         if (item == 0) {
@@ -192,9 +194,14 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         Button buttonOK = dialog.findViewById(R.id.btn_sync_ok);
         AppConfig.changeRoundViewColor(buttonOK);
+        buttonOK.setTextColor(AppConfig.getThemeColor());
         buttonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(item == 0){
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivityForResult(intent, ComonUtils.CODE_LOG_IN);
+                }
                 dialog.dismiss();
             }
         });

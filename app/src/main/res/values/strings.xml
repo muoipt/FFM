@@ -108,6 +108,7 @@
 
     <string name="error_sign_up_email_exist">Email is existed</string>
     <string name="error_sign_up_group_not_exist">Group is not existed</string>
+    <string name="error_update_not_change">Nothing changed to update</string>
 
     <string name="default_group">My Group</string>
     <string name="default_user_email">My email</string>
@@ -176,9 +177,9 @@
     <string name="nov">Nov</string>
     <string name="dec">Dec</string>
 
-    <string name="search_user_result">Found Users</string>
-    <string name="search_category_result">Found Categories</string>
-    <string name="search_report_result">Found Reports</string>
+    <string name="search_user_result">Users</string>
+    <string name="search_category_result">Categories</string>
+    <string name="search_report_result">Reports</string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->

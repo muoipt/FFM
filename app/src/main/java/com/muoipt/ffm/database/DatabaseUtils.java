@@ -30,7 +30,7 @@ import java.util.List;
  */
 
 public class DatabaseUtils extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "FFM.db";
+    public static final String DATABASE_NAME = "FFMDB.db";
 
     public static final String TABLE_CATEGORY_DETAIL = "CategoryDetailTbl";
     public static final String COLUMN_CATEGORY_ID = "categoryID";
@@ -43,6 +43,7 @@ public class DatabaseUtils extends SQLiteOpenHelper {
     public static final String COLUMN_CATEGORY_UPDATE_AT = "categoryUpdateAt";
     public static final String COLUMN_CATEGORY_DELETED = "categoryDeleted";
     public static final String COLUMN_CATEGORY_MARK_IMPORTAN = "categoryMarkImportant";
+    public static final String CAT_AVATAR_IMG_FILE_SERVER = "catAvatarImgFile";
 
     public static final String TABLE_REPORT_DETAIL = "ReportDetailTbl";
     public static final String COLUMN_REPORT_ID = "reportId";
@@ -1037,7 +1038,8 @@ public class DatabaseUtils extends SQLiteOpenHelper {
     private ContentValues ReportDetailUpdateToValues(ReportDetail reportDetail) {
         ContentValues values = new ContentValues();
         values.put(COLUMN_REPORT_ID, reportDetail.getReportId());
-        values.put(COLUMN_REPORT_DATETIME, reportDetail.getReportDatetime());
+//        values.put(COLUMN_REPORT_DATETIME, reportDetail.getReportDatetime());
+        values.put(COLUMN_REPORT_DATETIME, ComonUtils.convertDateForDB(reportDetail.getReportDatetime()));
         values.put(COLUMN_REPORT_CAT_ID, reportDetail.getReportCatId());
         values.put(COLUMN_REPORT_AMOUNT, reportDetail.getReportAmount());
         values.put(COLUMN_REPORT_TITLE, reportDetail.getReportTitle());

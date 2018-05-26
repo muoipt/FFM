@@ -32,12 +32,15 @@
             app:titleTextColor="@color/color_white" />
 
         <ScrollView
+            android:id="@+id/scrollView_signup"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/layout_scroll_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -58,11 +61,13 @@
                 </LinearLayout>
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layout_email"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dp_80"
                     android:layout_marginTop="@dimen/activity_horizontal_margin_top"
                     android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin">
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:layout_below="@id/banner_sign_up">
 
                     <AutoCompleteTextView
                         android:id="@+id/email_signup"
@@ -71,39 +76,45 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_email"
                         android:inputType="textEmailAddress"
-                        android:maxLines="1" />
+                        android:maxLines="1"
+                        android:imeOptions="actionNext"
+                        android:nextFocusDown="@id/password_signup"/>
 
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layout_password"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_horizontal_margin_top"
+                    android:layout_height="@dimen/dp_80"
                     android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin">
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:layout_below="@id/layout_email">
 
-                    <EditText
+                    <AutoCompleteTextView
                         android:id="@+id/password_signup"
                         style="@style/EditTextThemeDark"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_password"
                         android:imeActionLabel="@string/action_sign_up_short"
-                        android:imeOptions="actionUnspecified"
-                        android:maxLines="1" />
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
+                        android:nextFocusDown="@id/group_signup"/>
 
                 </android.support.design.widget.TextInputLayout>
 
                 <RelativeLayout
+                    android:id="@+id/layout_group"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="@dimen/dp_80"
+                    android:layout_below="@id/layout_password">
 
                     <com.muoipt.ffm.utils.CircularImageView
                         android:id="@+id/imgNewGroup"
                         android:layout_width="@dimen/dp_50"
                         android:layout_height="@dimen/dp_50"
                         android:layout_alignParentRight="true"
-                        android:layout_alignParentBottom="true"
                         android:layout_marginRight="@dimen/dp_20"
                         android:background="@drawable/button_round_image"
                         android:src="@drawable/icon_plus"/>
@@ -111,9 +122,8 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_horizontal_margin_top"
                     android:layout_marginLeft="@dimen/dp_16"
-                    android:paddingRight="@dimen/dp_8"
+                    android:paddingRight="@dimen/dp_5"
                     android:layout_toLeftOf="@id/imgNewGroup">
 
                     <EditText
@@ -123,8 +133,10 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_group"
                         android:imeActionLabel="@string/action_sign_up_short"
-                        android:imeOptions="actionUnspecified"
-                        android:maxLines="1" />
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:imeOptions="actionDone"
+                        android:nextFocusDown="@id/sign_up_button"/>
 
                 </android.support.design.widget.TextInputLayout>
                 </RelativeLayout>
@@ -139,22 +151,18 @@
                     android:layout_marginBottom="@dimen/dp_24"
                     android:background="@drawable/button_with_ripple"
                     android:text="@string/action_register"
-                    android:textSize="@dimen/text_size_normal">
+                    android:textSize="@dimen/text_size_normal"
+                    android:layout_below="@id/layout_group">
 
                 </android.support.v7.widget.AppCompatButton>
 
-            </LinearLayout>
+                <View
+                    android:id="@+id/viewEmpty"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_300"
+                    android:layout_below="@id/sign_up_button"/>
+            </RelativeLayout>
         </ScrollView>
     </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_add_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/dp_14"
-        app:layout_anchor="@id/group_signup"
-        app:layout_anchorGravity="end|center_vertical"
-        app:srcCompat="@drawable/icon_default_camera_large"
-        android:visibility="gone"/>
 
 </android.support.design.widget.CoordinatorLayout>

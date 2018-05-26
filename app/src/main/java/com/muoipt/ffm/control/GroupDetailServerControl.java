@@ -253,7 +253,7 @@ public class GroupDetailServerControl {
 
                 ParseFile imgAvatarFile = object.getParseFile(DatabaseUtils.GROUP_AVATAR_IMG_FILE_SERVER);
 
-                if (imgAvatarFile != null && !imgAvatarFile.equals("")) {
+                if (imgAvatarFile != null && imgAvatarFile.getDataStream() != null) {
                     //save file to cache and then set path to group
                     File savedFile = new File(mContext.getExternalCacheDir(), ComonUtils.createNewCacheGroupFileName());
 

@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -20,13 +21,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsoluteLayout;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.muoipt.ffm.R;
@@ -57,9 +65,11 @@ public class SignUpActivity extends AppCompatActivity {
     private View mProgressView;
     private View mSignupFormView;
     private Button registerButton;
-    private FloatingActionButton fabGroup;
     private LinearLayout banner_sign_up;
     private ImageView imgUserAvatar;
+    private ScrollView scrollView_signup;
+    private RelativeLayout layout_scroll_view;
+    private View viewEmpty;
 
     private Context mContext;
     private String signupEmail;
@@ -93,6 +103,7 @@ public class SignUpActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         getControlWidget();
+
         groupDetailServerControl = new GroupDetailServerControl(getApplicationContext());
         groupDetailControl = new GroupDetailControl(getApplicationContext());
 
@@ -154,17 +165,7 @@ public class SignUpActivity extends AppCompatActivity {
                     initViewProfile();
                 }
             }
-
-
         }
-
-
-        fabGroup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                processNewGroup();
-            }
-        });
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,11 +187,97 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-
         imgUserAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 processChooseAvatar();
+            }
+        });
+
+        mEmailView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, final boolean hasFocus) {
+                if (hasFocus) {
+                    processSoftKeyboard(true, mEmailView);
+                }
+            }
+        });
+
+        mEmailView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                processSoftKeyboard(true, mEmailView);
+            }
+        });
+
+        mPasswordView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, final boolean hasFocus) {
+                if (hasFocus) {
+                    processSoftKeyboard(true, mPasswordView);
+                }
+            }
+        });
+
+        mPasswordView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                processSoftKeyboard(true, mPasswordView);
+            }
+        });
+
+        mPasswordView.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                boolean isGroupEnable = mGroupView.isEnabled();
+
+                if (actionId == EditorInfo.IME_ACTION_NEXT && isGroupEnable) {
+                    mGroupView.requestFocus();
+                    processSoftKeyboard(true, mGroupView);
+                    return true;
+                } else if (actionId == EditorInfo.IME_ACTION_NEXT && !isGroupEnable) {
+                    registerButton.requestFocus();
+                    processSoftKeyboard(false, registerButton);
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        mGroupView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, final boolean hasFocus) {
+                if (hasFocus) {
+                    processSoftKeyboard(true, mGroupView);
+                }
+            }
+        });
+
+        mGroupView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                processSoftKeyboard(true, mGroupView);
+            }
+        });
+
+        mGroupView.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    registerButton.requestFocus();
+                    processSoftKeyboard(true, registerButton);
+
+                    if (userViewProfile == null) {
+                        attemptSignUp();
+                    } else if (userViewProfile != null && AppConfig.getUserLogInInfor().getUserEmail().equals(userViewProfile.getUserEmail())) {
+                        attemptSignUp();
+                    } else {
+                        finish();
+                    }
+                    return true;
+                }
+                return false;
             }
         });
     }
@@ -204,9 +291,11 @@ public class SignUpActivity extends AppCompatActivity {
         mSignupFormView = findViewById(R.id.email_signup_form);
         mProgressView = findViewById(R.id.signup_progress);
         registerButton = (Button) findViewById(R.id.sign_up_button);
-        fabGroup = (FloatingActionButton) findViewById(R.id.fab_add_group);
         banner_sign_up = (LinearLayout) findViewById(R.id.banner_sign_up);
         imgUserAvatar = (ImageView) findViewById(R.id.imgUserAvatar);
+        scrollView_signup = (ScrollView) findViewById(R.id.scrollView_signup);
+        layout_scroll_view = (RelativeLayout) findViewById(R.id.layout_scroll_view);
+        viewEmpty = findViewById(R.id.viewEmpty);
     }
 
     private void handleOnBackPress() {
@@ -224,6 +313,18 @@ public class SignUpActivity extends AppCompatActivity {
             imgUserAvatar.setEnabled(false);
             imgNewGroup.setVisibility(View.GONE);
             registerButton.setText(getString(R.string.string_close));
+            toolbar.setTitle("View member");
+
+            RelativeLayout.LayoutParams params =
+                    (RelativeLayout.LayoutParams)registerButton.getLayoutParams();
+
+            params.addRule(RelativeLayout.BELOW, R.id.layout_email);
+            params.topMargin = (int)(getResources().getDimension(R.dimen.dp_10));
+            registerButton.setLayoutParams(params);
+
+            registerButton.setLayoutParams(params);
+
+
         } else {
             registerButton.setText(getString(R.string.string_update));
             mPasswordView.setText(userViewProfile.getUserPassword());
@@ -231,18 +332,26 @@ public class SignUpActivity extends AppCompatActivity {
             if (currentGroup.getGroupAvatarImgPath() != null && !currentGroup.getGroupAvatarImgPath().equals(""))
                 imgNewGroup.setImageBitmap(getAvatarBitmapFromPath(currentGroup.getGroupAvatarImgPath()));
             isAdminUpdate = true;
+            toolbar.setTitle("Update profile");
         }
 
         toolbar.setTitle(getString(R.string.user_view));
         mEmailView.setText(userViewProfile.getUserEmail());
         mGroupView.setEnabled(false);
         imgNewGroup.setEnabled(false);
-        fabGroup.setVisibility(View.GONE);
         String userAvatarImgPath = userViewProfile.getUserAvatarImgPath();
         if (userAvatarImgPath != null && !userAvatarImgPath.equals("")) {
             imgUserAvatar.setImageBitmap(getAvatarBitmapFromPath(userAvatarImgPath));
             userInputAvatarImgPath = userAvatarImgPath;
         }
+
+//        processSoftKeyboard(false, registerButton);
+        mEmailView.clearFocus();
+        mEmailView.setError(null);
+
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mEmailView.getWindowToken(), 0);
+
     }
 
     private void attemptSignUp() {
@@ -294,9 +403,9 @@ public class SignUpActivity extends AppCompatActivity {
 
         if (cancel) {
             focusView.requestFocus();
+            processSoftKeyboard(false, focusView);
         } else {
             showProgress(true);
-            registerButton.setVisibility(View.GONE);
             getInputUserDetail();
             mSignupTask = new UserSignupTask();
             mSignupTask.execute();
@@ -353,7 +462,6 @@ public class SignUpActivity extends AppCompatActivity {
                 }
 
                 //save data to DB
-
                 userDetailDBControl.addUser(signUpUser);
             } else {
                 userId = userViewProfile.getUserId();
@@ -414,12 +522,17 @@ public class SignUpActivity extends AppCompatActivity {
             } else if (result == ComonUtils.SIGN_UP_RESULT.FAILED_EMAIL_EXIST) {
                 mEmailView.setError(getString(R.string.error_sign_up_email_exist));
                 mEmailView.requestFocus();
+                processSoftKeyboard(false, mEmailView);
+
             } else if (result == ComonUtils.SIGN_UP_RESULT.FAILED_GROUP_NOT_EXIST) {
                 mGroupView.setError(getString(R.string.error_sign_up_group_not_exist));
                 mGroupView.requestFocus();
+                processSoftKeyboard(false, mGroupView);
             } else if (result == ComonUtils.SIGN_UP_RESULT.FAILED_UPDATE_NOT_CHANGED) {
-                mGroupView.setError(getString(R.string.error_sign_up_group_not_exist));
-                mGroupView.requestFocus();
+//                mGroupView.setError(getString(R.string.error_update_not_change));
+//                mGroupView.requestFocus();
+//                processSoftKeyboard(false, mGroupView);
+                finish();
             }
         }
 
@@ -450,6 +563,8 @@ public class SignUpActivity extends AppCompatActivity {
                 mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             }
         });
+
+        processSoftKeyboard(false, mProgressView);
     }
 
     private void processNewGroup() {
@@ -485,13 +600,12 @@ public class SignUpActivity extends AppCompatActivity {
         toolbar.setBackgroundColor(AppConfig.getThemeColor());
 
         banner_sign_up.setBackgroundColor(AppConfig.getAlpha1BackgroundColorSetting());
-        fabGroup.setBackgroundColor(AppConfig.getThemeColor());
-        fabGroup.setRippleColor(AppConfig.getThemeColor());
-        fabGroup.setBackgroundTintList(ColorStateList.valueOf(AppConfig.getThemeColor()));
         mEmailView.setBackgroundTintList(ColorStateList.valueOf(AppConfig.getThemeColor()));
         mPasswordView.setBackgroundTintList(ColorStateList.valueOf(AppConfig.getThemeColor()));
         mGroupView.setBackgroundTintList(ColorStateList.valueOf(AppConfig.getThemeColor()));
         mGroupView.setCompoundDrawableTintList(ColorStateList.valueOf(AppConfig.getThemeColor()));
+
+        registerButton.setTextColor(AppConfig.getThemeColor());
 
         AppConfig.changeRoundViewColor(registerButton);
         AppConfig.changeRoundViewColor(imgUserAvatar);
@@ -563,17 +677,17 @@ public class SignUpActivity extends AppCompatActivity {
                     String groupAvatarImgPath = groupDetail.getGroupAvatarImgPath();
 
                     if (groupAvatar != -1) {
-                        fabGroup.setImageResource(groupAvatar);
                         imgNewGroup.setImageDrawable(getDrawable(groupAvatar));
                         userInputAvatar = groupAvatar;
                     } else if (groupAvatarImgPath != null && !groupAvatarImgPath.equals("")) {
-                        fabGroup.setImageBitmap(getAvatarBitmapFromPath(groupAvatarImgPath));
                         imgNewGroup.setImageBitmap(getAvatarBitmapFromPath(groupAvatarImgPath));
                         userInputAvatar = -1;
                     }
                     mGroupView.setText(groupName);
                     signupRole = ComonUtils.USER_ROLE_ADMIN; //create group is admin role
                     signupStatus = ComonUtils.USER_STATUS_NORMAL;
+                    processSoftKeyboard(false, registerButton);
+                    registerButton.requestFocus();
                 }
                 break;
             case ComonUtils.CODE_UPDATE_GROUP:
@@ -585,22 +699,42 @@ public class SignUpActivity extends AppCompatActivity {
                     String groupAvatarImgPath = groupDetail2.getGroupAvatarImgPath();
 
                     if (groupAvatar != -1) {
-                        fabGroup.setImageResource(groupAvatar);
                         imgNewGroup.setImageDrawable(getDrawable(groupAvatar));
                         userInputAvatar = groupAvatar;
                     } else if (groupAvatarImgPath != null && groupAvatarImgPath != "") {
-                        fabGroup.setImageBitmap(getAvatarBitmapFromPath(groupAvatarImgPath));
                         imgNewGroup.setImageBitmap(getAvatarBitmapFromPath(groupAvatarImgPath));
                         userInputAvatar = -1;
                     }
                     mGroupView.setText(groupName);
                     signupRole = ComonUtils.USER_ROLE_ADMIN; //update group is admin role
                     signupStatus = ComonUtils.USER_STATUS_NORMAL;
+                    processSoftKeyboard(false, registerButton);
+                    registerButton.requestFocus();
                 }
                 break;
         }
+
+        resetError();
     }
 
+    private void resetError(){
+        if (mPasswordView.getError() != null) {
+            mPasswordView.setError(null);
+            mPasswordView.clearFocus();
+        }
+
+        if (mEmailView.getError() != null) {
+            mEmailView.setError(null);
+            mEmailView.clearFocus();
+        }
+
+        if (mGroupView.getError() != null) {
+            mGroupView.setError(null);
+            mGroupView.clearFocus();
+        }
+
+        registerButton.requestFocus();
+    }
 
     private Bitmap getAvatarBitmapFromPath(String imgPath) {
         File image = new File(imgPath);
@@ -613,5 +747,27 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void setAvatarBitmap(Bitmap avatarBitmap) {
         imgUserAvatar.setImageBitmap(avatarBitmap);
+    }
+
+    private void processSoftKeyboard(boolean show, View view) {
+        if (show) {
+            if (view == mEmailView || view == mPasswordView || view == registerButton) {
+                layout_scroll_view.scrollTo(0, 0);
+                viewEmpty.setVisibility(View.VISIBLE);
+            } else if (view == mGroupView) {
+                layout_scroll_view.scrollTo(0, 0);
+                layout_scroll_view.scrollTo(0, (int) getResources().getDimension(R.dimen.dp_200));
+            }
+
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(view, 0);
+
+        } else {
+            layout_scroll_view.scrollTo(0, 0);
+            viewEmpty.setVisibility(View.GONE);
+
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

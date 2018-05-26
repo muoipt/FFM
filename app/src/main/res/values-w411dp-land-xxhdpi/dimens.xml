@@ -5,7 +5,7 @@
     <dimen name="activity_horizontal_margin_right">50dp</dimen>
     <dimen name="activity_horizontal_margin_top">26dp</dimen>
     <dimen name="activity_horizontal_margin_bottom">26dp</dimen>
-    <dimen name="activity_horizontal_margin_top_extra">36dp</dimen>
+    <dimen name="activity_horizontal_margin_top_extra">32dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_vertical_margin_bottom">12dp</dimen>
     <dimen name="nav_vertical_margin_bottom">5dp</dimen>
@@ -110,8 +110,8 @@
     <dimen name="add_new_report_toolbar_height">60dp</dimen>
     <dimen name="add_new_report_toolbar_btn_width">200dp</dimen>
 
-    <dimen name="img_sync_width">150dp</dimen>
-    <dimen name="img_sync_height">100dp</dimen>
+    <dimen name="img_sync_width">70dp</dimen>
+    <dimen name="img_sync_height">70dp</dimen>
     <dimen name="popup_dialog_width">250dp</dimen>
     <dimen name="popup_dialog_height">300dp</dimen>
 

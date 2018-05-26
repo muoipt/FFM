@@ -8,6 +8,7 @@ import com.muoipt.ffm.model.ReportDetailDisplay;
 import com.muoipt.ffm.model.TypeDetail;
 import com.muoipt.ffm.model.UserDetail;
 import com.muoipt.ffm.utils.AppConfig;
+import com.muoipt.ffm.utils.ComonUtils;
 import com.muoipt.ffm.utils.SyncUtils;
 
 import java.util.ArrayList;
@@ -35,12 +36,14 @@ public class ReportDetailDisplayControl {
         return arrReportDetail;
     }
 
-    public ArrayList<ReportDetailDisplay> getReportDetailDisplayFromDBByUser(UserDetail user) {
+    public ArrayList<ReportDetailDisplay> getReportDetailDisplayFromDBByUser(UserDetail currentUser) {
         ArrayList<ReportDetailDisplay> arrReportDetail = new ArrayList<ReportDetailDisplay>();
 
-        databaseUtils.open();
-        arrReportDetail = databaseUtils.getAllReportDetaiDisplaylByUser(user);
-        databaseUtils.close();
+        if (currentUser.getUserEmail() != null && currentUser.getUserStatus() == ComonUtils.USER_STATUS_NORMAL) {
+            databaseUtils.open();
+            arrReportDetail = databaseUtils.getAllReportDetaiDisplaylByUser(currentUser);
+            databaseUtils.close();
+        }
 
         return arrReportDetail;
     }

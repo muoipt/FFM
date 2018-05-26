@@ -2,6 +2,7 @@ package com.muoipt.ffm.control;
 
 import android.content.Context;
 
+import com.muoipt.ffm.utils.ComonUtils;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -90,10 +91,13 @@ public class CategoryDetailControl {
     public ArrayList<CategoryDetail> getAllCategoryDetailFromDBByUser() {
 
         UserDetail user = AppConfig.getUserLogInInfor();
+        ArrayList<CategoryDetail> arrCategoryDetail = new ArrayList<CategoryDetail>();
 
-        databaseUtils.open();
-        ArrayList<CategoryDetail> arrCategoryDetail = databaseUtils.getAllTotalCategoryDetailByUser(user);
-        databaseUtils.close();
+        if (user.getUserStatus() == ComonUtils.USER_STATUS_NORMAL) {
+            databaseUtils.open();
+            arrCategoryDetail = databaseUtils.getAllTotalCategoryDetailByUser(user);
+            databaseUtils.close();
+        }
         return arrCategoryDetail;
     }
 

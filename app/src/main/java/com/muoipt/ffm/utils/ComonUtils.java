@@ -162,6 +162,7 @@ public class ComonUtils {
 
     public static final String DISPLAY_COLOR_DIALOG = "DISPLAY_COLOR_DIALOG";
 
+    public static int count_util = 0;
 
     public enum SIGN_UP_RESULT {
         SUCCESS,
@@ -416,19 +417,69 @@ public class ComonUtils {
     public static String createNewCacheGroupFileName() {
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
-        return "group_" + dateFormat.format(date) + "." + Bitmap.CompressFormat.JPEG.toString();
+        String res = count_util + "group_" + dateFormat.format(date) + "." + Bitmap.CompressFormat.JPEG.toString();
+        count_util += 1;
+        return res;
     }
 
     public static String createNewCacheUserFileName() {
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
-        return "user_" + dateFormat.format(date) + "." + Bitmap.CompressFormat.JPEG.toString();
+        String res = count_util + "user_" + dateFormat.format(date) + "." + Bitmap.CompressFormat.JPEG.toString();
+        count_util += 1;
+        return res;
     }
 
     public static String createNewCacheCatFileName() {
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
-        return "cat_" + dateFormat.format(date) + "." + Bitmap.CompressFormat.JPEG.toString();
+        String res = count_util + "cat_" + dateFormat.format(date) + "." + Bitmap.CompressFormat.JPEG.toString();
+        count_util += 1;
+        return res;
+    }
+
+    public static String convertDateForDB(String reportDatetime) {
+//        reportDatetime = "May 26"  => 2018-05-26
+        String year = getCurrentYear();
+
+        String[] values = reportDatetime.split(" ");
+
+        String month = values[0];
+
+        String day = values[1];
+
+        String monthNumber = getMonthNumber(month);
+
+        return year + "-" + monthNumber + "-" + day;
+    }
+
+    public static String getMonthNumber(String monthInFormatMMM) {
+        if (monthInFormatMMM.equals("Jan"))
+            return "01";
+        else if (monthInFormatMMM.equals("Feb"))
+            return "02";
+        else if (monthInFormatMMM.equals("Mar"))
+            return "03";
+        else if (monthInFormatMMM.equals("Apr"))
+            return "04";
+        else if (monthInFormatMMM.equals("May"))
+            return "05";
+        else if (monthInFormatMMM.equals("Jun"))
+            return "06";
+        else if (monthInFormatMMM.equals("Jul"))
+            return "07";
+        else if (monthInFormatMMM.equals("Aug"))
+            return "08";
+        else if (monthInFormatMMM.equals("Sep"))
+            return "09";
+        else if (monthInFormatMMM.equals("Oct"))
+            return "10";
+        else if (monthInFormatMMM.equals("Nov"))
+            return "11";
+        else if (monthInFormatMMM.equals("Dev"))
+            return "12";
+
+        return null;
     }
 
     public static ParseFile saveBitmapToFile(Bitmap b, String path) {
@@ -484,9 +535,13 @@ public class ComonUtils {
         }
     }
 
-    public static void deleteUnusedFile(String path){
+    public static void deleteUnusedFile(String path) {
         //delete avatar img in cache
-        File file = new File(path);
-        file.delete();
+
+        //not delete for interview
+//        File file = new File(path);
+//        file.delete();
     }
+
+
 }

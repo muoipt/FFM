@@ -299,7 +299,8 @@ public class ChartViewActivity extends AppCompatActivity {
                 defaultRenderer.setChartTitle(title.concat(ComonUtils.getCurrentStrDatetimeFormatMMMdd()));
         }
 
-        defaultRenderer.setChartTitleTextSize(58);
+//        defaultRenderer.setChartTitleTextSize(58);
+        defaultRenderer.setChartTitleTextSize(getResources().getDimension(R.dimen.text_size_normal));
         defaultRenderer.setLabelsTextSize(40);
         defaultRenderer.setLegendTextSize(40);
         defaultRenderer.setPanEnabled(false);

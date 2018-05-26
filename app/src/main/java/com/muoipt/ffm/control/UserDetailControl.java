@@ -5,6 +5,7 @@ import android.content.Context;
 import com.muoipt.ffm.database.DatabaseUtils;
 import com.muoipt.ffm.model.UserDetail;
 import com.muoipt.ffm.utils.AppConfig;
+import com.muoipt.ffm.utils.ComonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class UserDetailControl {
         databaseUtils = AppConfig.databaseUtils;
     }
 
-    public boolean checkTableUserExistInDB(){
+    public boolean checkTableUserExistInDB() {
         boolean isExist = false;
 
         databaseUtils.open();
@@ -30,13 +31,13 @@ public class UserDetailControl {
         return isExist;
     }
 
-    public void createTableUser(){
+    public void createTableUser() {
         databaseUtils.open();
         databaseUtils.createTableUser();
         databaseUtils.close();
     }
 
-    public ArrayList<UserDetail> getAllUsersFromDB(){
+    public ArrayList<UserDetail> getAllUsersFromDB() {
 
         databaseUtils.open();
         ArrayList<UserDetail> arrUsers = null;
@@ -46,7 +47,7 @@ public class UserDetailControl {
         return arrUsers;
     }
 
-    public ArrayList<UserDetail> getNewUsersFromDB(){
+    public ArrayList<UserDetail> getNewUsersFromDB() {
 
         UserDetail currentUser = AppConfig.getUserLogInInfor();
         ArrayList<UserDetail> arrUsers = new ArrayList<UserDetail>();
@@ -58,17 +59,19 @@ public class UserDetailControl {
         return arrUsers;
     }
 
-    public ArrayList<UserDetail> getActiveUsersFromDB(UserDetail currentUser){
+    public ArrayList<UserDetail> getActiveUsersFromDB(UserDetail currentUser) {
 
         ArrayList<UserDetail> arrUsers = new ArrayList<UserDetail>();
-        databaseUtils.open();
-        arrUsers = databaseUtils.getActiveUsers(currentUser);
-        databaseUtils.close();
 
+        if (currentUser.getUserEmail() != null && currentUser.getUserStatus() == ComonUtils.USER_STATUS_NORMAL) {
+            databaseUtils.open();
+            arrUsers = databaseUtils.getActiveUsers(currentUser);
+            databaseUtils.close();
+        }
         return arrUsers;
     }
 
-    public ArrayList<UserDetail> getRemovedUsersFromDB(){
+    public ArrayList<UserDetail> getRemovedUsersFromDB() {
 
         UserDetail currentUser = AppConfig.getUserLogInInfor();
         ArrayList<UserDetail> arrUsers = new ArrayList<UserDetail>();
@@ -80,21 +83,21 @@ public class UserDetailControl {
         return arrUsers;
     }
 
-    public void addUser(UserDetail user){
+    public void addUser(UserDetail user) {
         databaseUtils.open();
         databaseUtils.insertUser(user);
         databaseUtils.close();
     }
 
-    public void updateUser(UserDetail user){
+    public void updateUser(UserDetail user) {
         databaseUtils.open();
         databaseUtils.updateUser(user);
         databaseUtils.close();
     }
 
-    public boolean updateUser(ArrayList<UserDetail> users){
+    public boolean updateUser(ArrayList<UserDetail> users) {
         databaseUtils.open();
-        for(int i=0; i<users.size(); i++)
+        for (int i = 0; i < users.size(); i++)
             databaseUtils.updateUser(users.get(i));
         databaseUtils.close();
         return true;
@@ -103,8 +106,8 @@ public class UserDetailControl {
     public UserDetail checkDataUserExistInDb(String email) {
         ArrayList<UserDetail> users = getAllUsersFromDB();
 
-        for(int i=0; i<users.size(); i++){
-            if(users.get(i).getUserEmail().equals(email)){
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUserEmail().equals(email)) {
                 return users.get(i);
             }
         }
@@ -115,8 +118,8 @@ public class UserDetailControl {
     public int getGroupIdFromUser(UserDetail user) {
 
         ArrayList<UserDetail> users = getAllUsersFromDB();
-        for(int i=0; i<users.size(); i++){
-            if(users.get(i).getUserEmail().equals(user.getUserEmail())){
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUserEmail().equals(user.getUserEmail())) {
                 return users.get(i).getUserGroupId();
             }
         }
@@ -126,8 +129,8 @@ public class UserDetailControl {
 
     public int getUserIdFromUserInDB(UserDetail user) {
         ArrayList<UserDetail> users = getAllUsersFromDB();
-        for(int i=0; i<users.size(); i++){
-            if(users.get(i).getUserEmail().equals(user.getUserEmail())){
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUserEmail().equals(user.getUserEmail())) {
                 return users.get(i).getUserId();
             }
         }
@@ -143,7 +146,7 @@ public class UserDetailControl {
         return maxId;
     }
 
-    public void deleteAllUsers(){
+    public void deleteAllUsers() {
         databaseUtils.open();
         databaseUtils.deleteAllUsers();
         databaseUtils.close();
@@ -185,7 +188,7 @@ public class UserDetailControl {
     public int getTotalUsersInGroup() {
         UserDetail currentUser = AppConfig.getUserLogInInfor();
 
-        if(currentUser.getUserEmail() != null) {
+        if (currentUser.getUserEmail() != null) {
 
             databaseUtils.open();
             ArrayList<UserDetail> userList = databaseUtils.getAllUsersInGroupFromDB(currentUser);

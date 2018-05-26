@@ -23,11 +23,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -69,8 +71,7 @@ public class ReportAddNewActivity extends AppCompatActivity {
     private boolean isUpdateReport = false;
     private Toolbar toolbar;
     private InputMethodManager imm;
-
-//    private android.support.v7.app.ActionBar actionBar;
+    private LinearLayout layout_scroll_report;
 
     public ReportAddNewActivity() {
     }
@@ -85,9 +86,6 @@ public class ReportAddNewActivity extends AppCompatActivity {
 
         getControlWidget();
         initComponent();
-
-//        actionBar = getSupportActionBar();
-//        actionBar.setBackgroundDrawable(new ColorDrawable(AppConfig.getThemeColor()));
 
         CategoryDetailControl categoryDetailControl = new CategoryDetailControl(this);
         arrCategories = categoryDetailControl.getAllCategoryDetailFromDBByUser();
@@ -135,60 +133,44 @@ public class ReportAddNewActivity extends AppCompatActivity {
             }
         });
 
-        editReportTitle.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
-
+        editReportTitle.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_NEXT){
                     imm.hideSoftInputFromWindow(editReportTitle.getWindowToken(), 0);
                     btnReportCategory.requestFocus();
-                    btnReportCategory.setSelected(true);
-                    btnReportCategory.setPressed(true);
                     showListCategory();
                     return true;
+                }
+
+
+                return false;
+            }
+        });
+
+        editReportAmount.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_NEXT){
+                    editReportNotes.requestFocus();
+                    layout_scroll_report.scrollTo(0, (int)getResources().getDimension(R.dimen.dp_100));
+                }
+
+                return false;
+            }
+        });
+
+        editReportNotes.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_DONE){
+                    imm.hideSoftInputFromWindow(editReportNotes.getWindowToken(),0);
+                    attemptAddReport();
                 }
                 return false;
             }
         });
 
-        editReportTitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    editReportTitle.setFocusableInTouchMode(true);
-                    editReportTitle.setFocusable(true);
-                    editReportTitle.requestFocus();
-                    editReportTitle.setCursorVisible(true);
-                    editReportTitle.setActivated(true);
-                    editReportTitle.setPressed(true);
-                } else {
-                    editReportTitle.setFocusableInTouchMode(false);
-                    editReportTitle.setFocusable(false);
-                    editReportTitle.setCursorVisible(false);
-                }
-            }
-        });
-
-        editReportTitle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editReportTitle.setFocusableInTouchMode(true);
-                editReportTitle.setFocusable(true);
-                editReportTitle.requestFocus();
-                editReportTitle.setCursorVisible(true);
-                editReportTitle.setActivated(true);
-                editReportTitle.setPressed(true);
-            }
-        });
-
-        editReportAmount.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-                }
-            }
-        });
     }
 
     private void handleOnBackPress() {
@@ -230,6 +212,7 @@ public class ReportAddNewActivity extends AppCompatActivity {
         btnCancel = (Button) findViewById(R.id.btnAddReportCancel);
         btnOk = (Button) findViewById(R.id.btnAddReportOk);
         AddReportFormView = findViewById(R.id.add_new_report_form);
+        layout_scroll_report = (LinearLayout)findViewById(R.id.layout_scroll_report);
     }
 
     private void showListCategory() {
@@ -451,9 +434,5 @@ public class ReportAddNewActivity extends AppCompatActivity {
         ((ProgressBar)findViewById(R.id.add_report_progress))
                 .getIndeterminateDrawable()
                 .setColorFilter(AppConfig.getThemeColor(), PorterDuff.Mode.SRC_IN);
-
-//        actionBar.setBackgroundDrawable(new ColorDrawable(AppConfig.getThemeColor()));
-
-
     }
 }

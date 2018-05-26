@@ -1,9 +1,14 @@
 package com.muoipt.ffm.control;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import com.muoipt.ffm.R;
+import com.muoipt.ffm.utils.ComonUtils;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
@@ -13,6 +18,7 @@ import com.muoipt.ffm.model.UserDetail;
 import com.muoipt.ffm.utils.AppConfig;
 import com.muoipt.ffm.utils.SyncUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +49,17 @@ public class CategoryDetailServerControl {
             if (!arrCats.get(i).getCatAvatarImagePath().equals("")) {
                 catDetail.put(DatabaseUtils.COLUMN_CATEGORY_AVATAR_IMG_PATH, arrCats.get(i).getCatAvatarImagePath());
             }
+
+            ParseFile parseFile = null;
+            if (arrCats.get(i).getCatAvatarImagePath() != null && !arrCats.get(i).getCatAvatarImagePath().equals("")) {
+                Bitmap bitmap = getAvatarBitmapFromPath(arrCats.get(i).getCatAvatarImagePath());
+                if (bitmap != null) {
+                    parseFile = ComonUtils.saveBitmapToFile(bitmap, arrCats.get(i).getCatAvatarImagePath());
+                }
+
+                catDetail.put(DatabaseUtils.USER_AVATAR_IMG_FILE_SERVER, parseFile);
+            }
+
             catDetail.put(DatabaseUtils.COLUMN_CATEGORY_DELETED, arrCats.get(i).isCatDeleted());
             catDetail.put(DatabaseUtils.COLUMN_CATEGORY_MARK_IMPORTAN, arrCats.get(i).isMark());
 
@@ -59,6 +76,51 @@ public class CategoryDetailServerControl {
             });
 
         }
+
+        return res[0];
+    }
+
+    public boolean saveCatDetailToServer(CategoryDetail cat) {
+        final boolean[] res = {true};
+
+        ParseObject catDetail = new ParseObject(DatabaseUtils.TABLE_CATEGORY_DETAIL);
+        catDetail.put(DatabaseUtils.COLUMN_CATEGORY_ID, cat.getCatId());
+        catDetail.put(DatabaseUtils.COLUMN_CATEGORY_NAME, cat.getCatName());
+        catDetail.put(DatabaseUtils.COLUMN_CATEGORY_TYPE_ID, cat.getCatTypeId());
+        catDetail.put(DatabaseUtils.COLUMN_CATEGORY_LIMIT, cat.getCatLimit());
+        catDetail.put(DatabaseUtils.COLUMN_CATEGORY_STATUS, cat.isCatStatus());
+        if (cat.getCatAvatar() != -1) {
+            catDetail.put(DatabaseUtils.COLUMN_CATEGORY_AVATAR, cat.getCatAvatar());
+        }
+        if (cat.getCatAvatarImagePath() != null && !cat.getCatAvatarImagePath().equals("")) {
+            catDetail.put(DatabaseUtils.COLUMN_CATEGORY_AVATAR_IMG_PATH, cat.getCatAvatarImagePath());
+        }
+
+        ParseFile parseFile = null;
+        if (cat.getCatAvatarImagePath() != null && !cat.getCatAvatarImagePath().equals("")) {
+            Bitmap bitmap = getAvatarBitmapFromPath(cat.getCatAvatarImagePath());
+            if (bitmap != null) {
+                parseFile = ComonUtils.saveBitmapToFile(bitmap, cat.getCatAvatarImagePath());
+            }
+
+            catDetail.put(DatabaseUtils.USER_AVATAR_IMG_FILE_SERVER, parseFile);
+        }
+
+        catDetail.put(DatabaseUtils.COLUMN_CATEGORY_DELETED, cat.isCatDeleted());
+        catDetail.put(DatabaseUtils.COLUMN_CATEGORY_MARK_IMPORTAN, cat.isMark());
+
+        catDetail.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    Log.i("Save in background", "sucessful");
+                } else {
+                    Log.i("Save in background", "failed error : " + e.toString());
+                    res[0] = false;
+                }
+            }
+        });
+
 
         return res[0];
     }
@@ -228,11 +290,22 @@ public class CategoryDetailServerControl {
                     boolean catStatus = objects.get(i).getBoolean(DatabaseUtils.COLUMN_CATEGORY_STATUS);
                     int catAvatar = objects.get(i).getInt(DatabaseUtils.COLUMN_CATEGORY_AVATAR);
                     String catAvatarImgPath = objects.get(i).getString(DatabaseUtils.COLUMN_CATEGORY_AVATAR_IMG_PATH);
+                    ParseFile imgAvatarFile = objects.get(i).getParseFile(DatabaseUtils.USER_AVATAR_IMG_FILE_SERVER);
+
+                    String logInUserAvatarImgPath = null;
+                    if (imgAvatarFile != null && imgAvatarFile.getDataStream() != null) {
+                        //save file to cache and then set path to group
+                        File savedFile = new File(mContext.getExternalCacheDir(), ComonUtils.createNewCacheCatFileName());
+
+                        ComonUtils.copyInputStreamToFile(imgAvatarFile.getDataStream(), savedFile);
+
+                        logInUserAvatarImgPath = savedFile.getAbsolutePath();
+                    }
                     String updateAt = objects.get(i).getUpdatedAt().toString();
                     boolean catDeleted = objects.get(i).getBoolean(DatabaseUtils.COLUMN_CATEGORY_DELETED);
                     boolean catMarkImportant = objects.get(i).getBoolean(DatabaseUtils.COLUMN_CATEGORY_MARK_IMPORTAN);
 
-                    CategoryDetail categoryDetail = new CategoryDetail(catId, catName, catTypeId, catLimit, catStatus, catAvatar, catAvatarImgPath, catMarkImportant, updateAt, catDeleted);
+                    CategoryDetail categoryDetail = new CategoryDetail(catId, catName, catTypeId, catLimit, catStatus, catAvatar, logInUserAvatarImgPath, catMarkImportant, updateAt, catDeleted);
                     catDetailsServer.add(categoryDetail);
                 }
             }
@@ -243,7 +316,7 @@ public class CategoryDetailServerControl {
         return catDetailsServer;
     }
 
-    public boolean deleteAllCategoryServer(){
+    public boolean deleteAllCategoryServer() {
         ParseQuery<ParseObject> query2 = ParseQuery.getQuery(DatabaseUtils.TABLE_CATEGORY_DETAIL);
         try {
             List<ParseObject> objs = query2.find();
@@ -260,5 +333,18 @@ public class CategoryDetailServerControl {
         }
 
         return true;
+    }
+
+    private Bitmap getAvatarBitmapFromPath(String imgPath) {
+        File image = new File(imgPath);
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        Bitmap bitmap = null;
+
+        File file = new File(image.getPath());
+        if (file.exists()) {
+            bitmap = BitmapFactory.decodeFile(image.getPath(), bmOptions);
+            bitmap = Bitmap.createScaledBitmap(bitmap, (int) mContext.getResources().getDimension(R.dimen.img_header_main_icon_width), (int) mContext.getResources().getDimension(R.dimen.img_header_main_icon_width), true);
+        }
+        return bitmap;
     }
 }

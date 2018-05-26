@@ -93,6 +93,7 @@
 
     <string name="error_sign_up_email_exist">Email đã tồn tại</string>
     <string name="error_sign_up_group_not_exist">Nhóm không tồn tại</string>
+    <string name="error_update_not_change">Dữ liệu không thay đổi</string>
 
     <string name="default_group">Nhóm của tôi</string>
     <string name="default_user_email">Email của tôi</string>

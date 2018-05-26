@@ -33,7 +33,7 @@ import java.io.File;
  */
 
 public class AppConfig {
-    public static final String SAMPLE_DATA_APP = "SAMPLE_DATA_APP";
+    public static final String SAMPLE_DATA_APP = "SAMPLE_DATA_APP_FFM";
     public static final Uri CONTENT_URI = Uri.parse("content://com.muoipt.ffm.ffmcontentprovider/ffmitems");
     public static final String URI = "com.muoipt.ffm.ffmcontentprovider";
     public static final String FFM_ITEM = "ffmitems";

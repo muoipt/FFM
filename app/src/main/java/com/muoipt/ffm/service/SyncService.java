@@ -37,7 +37,7 @@ public class SyncService extends Service {
 
         @Override
         public void run() {
-            SyncManagement syncManagement = new SyncManagement(mContext);
+            SyncManagement syncManagement = new SyncManagement(getApplicationContext());
             Intent resultIntent = new Intent();
             resultIntent.setAction(ComonUtils.SYNC_ACTION);
 

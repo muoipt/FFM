@@ -38,6 +38,7 @@
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/layout_scroll_report"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -50,7 +51,9 @@
                     android:layout_marginTop="@dimen/dp_20"
                     android:hint="@string/add_new_report_title_text"
                     android:textColorHint="@color/color_black"
-                    android:focusableInTouchMode="true"/>
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
+                    android:imeOptions="actionNext"/>
 
                 <Button
                     android:id="@+id/btnListCategoryName"
@@ -63,6 +66,7 @@
                     android:text="@string/add_new_report_category_text"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
+                    android:imeOptions="actionNext"
                     android:textSize="@dimen/sp_16"
                     tools:ignore="RtlCompat" />
 
@@ -73,6 +77,7 @@
                     android:layout_height="@dimen/add_new_report_row_height"
                     android:hint="@string/add_new_report_amount_text"
                     android:inputType="number"
+                    android:imeOptions="actionNext"
                     android:textColorHint="@color/color_black" />
 
                 <EditText
@@ -81,7 +86,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/add_new_report_row_height"
                     android:hint="@string/add_new_report_notes_text"
-                    android:textColorHint="@color/color_black" />
+                    android:textColorHint="@color/color_black"
+                    android:singleLine="true"
+                    android:imeOptions="actionDone"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -105,6 +112,9 @@
                         android:text="@string/string_ok"
                         android:textSize="@dimen/add_new_category_title_textsize" />
                 </LinearLayout>
+
+                <include layout="@layout/layout_placeholder_scrollview_for_softkeyboard" />
+
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

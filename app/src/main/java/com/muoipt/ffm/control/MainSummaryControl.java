@@ -40,7 +40,7 @@ public class MainSummaryControl {
 
         ArrayList<MainSummaryReport> arrSummaryReport = new ArrayList<MainSummaryReport>();
 
-        if (user.getUserStatus() == 1) {
+        if (user.getUserEmail()!= null && user.getUserStatus() == ComonUtils.USER_STATUS_NORMAL) {
             databaseUtils.open();
             arrSummaryReport = databaseUtils.getAllMainSummaryReportByUser(user);
             databaseUtils.close();
@@ -123,7 +123,7 @@ public class MainSummaryControl {
         ArrayList<MainSummaryReport> arrSummaryReport = new ArrayList<MainSummaryReport>();
         ArrayList<MainSummaryReport> results = new ArrayList<MainSummaryReport>();
 
-        if (user.getUserStatus() == 1) {
+        if (user.getUserStatus() == ComonUtils.USER_STATUS_NORMAL) {
             databaseUtils.open();
             arrSummaryReport = databaseUtils.getAllMainSummaryReportByTypeByUserByTime(type, user, strdateFrom, strdateTo);
             databaseUtils.close();

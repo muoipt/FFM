@@ -30,6 +30,8 @@
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/add_new_category_layout_padding_name"
             android:focusableInTouchMode="true"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
             android:gravity="center_vertical"
             android:paddingRight="@dimen/add_new_category_layout_padding" />
     </LinearLayout>
@@ -252,5 +254,6 @@
             android:text="@string/string_ok"
             android:textSize="@dimen/add_new_category_title_textsize" />
     </LinearLayout>
+
 
 </LinearLayout>

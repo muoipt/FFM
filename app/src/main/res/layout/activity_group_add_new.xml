@@ -73,8 +73,9 @@
                         android:gravity="center"
                         android:hint="@string/prompt_group"
                         android:imeActionLabel="@string/action_group_add_new"
-                        android:imeOptions="actionUnspecified"
+                        android:imeOptions="actionDone"
                         android:maxLines="1"
+                        android:singleLine="true"
                         android:textSize="@dimen/text_size_large" />
 
                 </android.support.design.widget.TextInputLayout>

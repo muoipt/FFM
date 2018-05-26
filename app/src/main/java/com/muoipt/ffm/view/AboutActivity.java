@@ -43,7 +43,7 @@ public class AboutActivity extends AppCompatActivity {
 
         txtVersion = (TextView)findViewById(R.id.txtVersion);
 
-        txtVersion.setText(Html.fromHtml("<a href=\"mailto:muoipta@gmail.com\">Version 2.0 by Muoipt</a>"));
+        txtVersion.setText(Html.fromHtml("<a href=\"mailto:muoipham1229@gmail.com\">Version 2.0 by Muoipt</a>"));
         txtVersion.setMovementMethod(LinkMovementMethod.getInstance());
 
     }
@@ -52,9 +52,12 @@ public class AboutActivity extends AppCompatActivity {
         this.finish();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onResume() {
         super.onResume();
         toolbar.setBackgroundColor(AppConfig.getThemeColor());
+        txtVersion.setTextColor(AppConfig.getThemeColor());
+        txtVersion.setLinkTextColor(AppConfig.getThemeColor());
     }
 }

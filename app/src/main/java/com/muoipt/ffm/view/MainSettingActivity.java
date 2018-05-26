@@ -10,6 +10,8 @@ import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -350,6 +352,7 @@ public class MainSettingActivity extends AppCompatActivity implements View.OnCli
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void setThemeColor() {
         if (selectedColor == 0) return;
 
@@ -367,6 +370,7 @@ public class MainSettingActivity extends AppCompatActivity implements View.OnCli
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onResume() {
         super.onResume();
@@ -391,6 +395,7 @@ public class MainSettingActivity extends AppCompatActivity implements View.OnCli
         super.onDestroy();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void refreshBGColor() {
         div1.setBackgroundColor(AppConfig.getThemeColor());
         div2.setBackgroundColor(AppConfig.getThemeColor());
@@ -476,28 +481,34 @@ public class MainSettingActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-    private void displayAlertDlg(int item) {
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void displayAlertDlg(final int item) {
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_sync_layout);
         dialog.show();
 
         ImageView img_sync = dialog.findViewById(R.id.img_sync);
-        img_sync.setImageResource(R.drawable.info_icon);
+        img_sync.setImageResource(R.drawable.error_icon);
         TextView txt_message = dialog.findViewById(R.id.txt_message);
 
         if (item == 0) {
             txt_message.setText(getString(R.string.alert_login_info));
         } else if (item == 1) {
             txt_message.setText(getString(R.string.alert_internet_info));
-        } else if(item == 2){
+        } else if (item == 2) {
             txt_message.setText(getString(R.string.alert_user_status_info));
         }
 
         Button buttonOK = dialog.findViewById(R.id.btn_sync_ok);
         AppConfig.changeRoundViewColor(buttonOK);
+        buttonOK.setTextColor(AppConfig.getThemeColor());
         buttonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (item == 0) {
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivityForResult(intent, ComonUtils.CODE_LOG_IN);
+                }
                 dialog.dismiss();
             }
         });

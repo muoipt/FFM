@@ -44,7 +44,7 @@
             android:name=".view.CategoryAddNewActivity"
             android:label="@string/title_activity_category__add__new_"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateVisible|adjustResize|adjustPan" />
 
         <meta-data
             android:name="com.parse.SERVER_URL"
@@ -68,12 +68,12 @@
             android:name=".view.SignUpActivity"
             android:label="@string/title_activity_sign_up"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateVisible|adjustResize|adjustPan" />
         <activity
             android:name=".view.GroupAddNewActivity"
             android:label="@string/title_activity_group_add_new"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateVisible|adjustResize|adjustPan" />
         <activity
             android:name=".view.ReportAddNewActivity"
             android:label="@string/title_activity_report_add_new"

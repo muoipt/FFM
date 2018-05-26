@@ -18,30 +18,25 @@
             android:id="@+id/toolbar_member_list_layout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/app_bar_height"
-            android:paddingTop="@dimen/dp_40"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleGravity="center_horizontal|bottom"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            android:minHeight="@dimen/dp_100">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <com.muoipt.ffm.utils.CircularImageView
                 android:id="@+id/imgGroupAvatar"
-                android:layout_width="@dimen/app_bar_main_img_banner_height"
-                android:layout_height="@dimen/app_bar_main_img_banner_height"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="@dimen/dp_120"
                 android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/dp_40"
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:background="@drawable/button_round_image"
                 android:src="@drawable/icon_default_camera_large"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/member_list_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="@dimen/dp_60"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay"
-                android:titleMarginTop="@dimen/dp_20"/>
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -121,7 +116,7 @@
                 android:dividerHeight="@dimen/nav_divider_height"
                 android:nestedScrollingEnabled="true"
                 android:scrollbars="none"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <TextView
                 android:id="@+id/txtDiv9"

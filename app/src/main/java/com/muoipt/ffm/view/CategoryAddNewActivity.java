@@ -33,6 +33,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -118,6 +119,7 @@ public class CategoryAddNewActivity extends AppCompatActivity implements View.On
     private InputMethodManager imm;
     private boolean isAvatarFromGalary = false;
     private String catInputAvatarImgPath = "";
+    private View viewEmpty;
 
 
     @Override
@@ -154,6 +156,8 @@ public class CategoryAddNewActivity extends AppCompatActivity implements View.On
         });
 
 
+
+
     }
 
     private void getControlWidget() {
@@ -183,6 +187,7 @@ public class CategoryAddNewActivity extends AppCompatActivity implements View.On
         txt_banner_new_cat = (TextView) findViewById(R.id.txt_banner_new_cat);
         toolbar = (Toolbar) findViewById(R.id.add_cat_toolbar);
 //        imm.hideSoftInputFromWindow(editCatName.getWindowToken(), 0);
+//        viewEmpty = findViewById(R.id.viewEmpty);
 
 
     }
@@ -250,11 +255,10 @@ public class CategoryAddNewActivity extends AppCompatActivity implements View.On
 
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        editCatName.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
-
+        editCatName.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
                     imm.hideSoftInputFromWindow(editCatName.getWindowToken(), 0);
                     radioButtonIncome.requestFocus();
                     radioButtonIncome.setChecked(true);
@@ -351,6 +355,7 @@ public class CategoryAddNewActivity extends AppCompatActivity implements View.On
             Bitmap b = getAvatarBitmapFromPath(catInputAvatarImgPath);
 
             imgAvatarChoose.setImageBitmap(b);
+            txtSelectedAvatarChoose.setVisibility(View.VISIBLE);
         }
 
     }
@@ -427,6 +432,7 @@ public class CategoryAddNewActivity extends AppCompatActivity implements View.On
             focusView.requestFocus();
             return false;
         } else {
+            fabMark.setVisibility(View.GONE);
             showProgress(true);
         }
 
@@ -609,11 +615,11 @@ public class CategoryAddNewActivity extends AppCompatActivity implements View.On
                 categoryDetail.setCatId(serverControl.getNextCategoryDetailTblId());
 
                 //add category on server
-//                ArrayList<CategoryDetail> list = new ArrayList<CategoryDetail>();
-//                list.add(categoryDetail);
-//                if (!serverControl.saveCatDetailToServer(list)) {
-//                    return false;
-//                }
+                ArrayList<CategoryDetail> list = new ArrayList<CategoryDetail>();
+                list.add(categoryDetail);
+                if (!serverControl.saveCatDetailToServer(categoryDetail)) {
+                    return false;
+                }
 
                 if (!dbControl.addCategory(categoryDetail)) {
                     return false;
@@ -712,7 +718,6 @@ public class CategoryAddNewActivity extends AppCompatActivity implements View.On
 
         txt_banner_new_cat.setTextColor(getColor(AppConfig.current_theme_setting_color));
         toolbar.setBackgroundColor(AppConfig.getThemeColor());
-//        AppConfig.changeRoundViewColor(imgAvatarChoose);
 
         fabMark.setBackgroundColor(getColor(AppConfig.current_theme_setting_color));
         fabMark.setBackgroundTintList(ColorStateList.valueOf(getColor(AppConfig.current_theme_setting_color)));

@@ -13,6 +13,7 @@ import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
@@ -151,6 +152,7 @@ public class MainActivity extends AppCompatActivity
 
     private IFabClickListener iFabClickListener;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -232,6 +234,8 @@ public class MainActivity extends AppCompatActivity
                 imgBtnExtentList.setVisibility(View.GONE);
             }
         }
+
+//        processSignIn();
     }
 
     @Override
@@ -389,7 +393,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -412,6 +416,9 @@ public class MainActivity extends AppCompatActivity
 
             if (currentUser.getUserEmail() == null) {
                 displayAlertDlg(0);
+            } else if (currentUser.getUserEmail() != null && currentUser.getUserStatus()
+                    != ComonUtils.USER_STATUS_NORMAL) {
+                displayAlertDlg(2);
             } else {
                 if (viewPagerPos == 0) {
                     processDeleteSelectedCategories();
@@ -485,7 +492,7 @@ public class MainActivity extends AppCompatActivity
         return null;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onClick(View v) {
 //        if (AppConfig.getUserLogInInfor().getUserEmail() == null) {
@@ -510,13 +517,15 @@ public class MainActivity extends AppCompatActivity
                 processDisplayFFMInfo();
                 break;
             case R.id.mainFab:
-                if (currentUser.getUserEmail() != null && !currentUser.getUserEmail().equals("")) {
+                if (currentUser.getUserEmail() != null && !currentUser.getUserEmail().equals("") && currentUser.getUserStatus() == ComonUtils.USER_STATUS_NORMAL) {
                     if (viewPagerPos == 0) {
                         iFabClickListener = new MainSummaryFragmentFabClickImpl();
                     } else {
                         iFabClickListener = new MainReportFragmentFabClickImpl();
                     }
                     iFabClickListener.onFabClick(this);
+                } else if (currentUser.getUserEmail() != null && !currentUser.getUserEmail().equals("") && currentUser.getUserStatus() != ComonUtils.USER_STATUS_NORMAL) {
+                    displayAlertDlg(2);
                 } else {
                     displayAlertDlg(0);
                 }
@@ -532,13 +541,14 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void displayAlertDlg(int item) {
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void displayAlertDlg(final int item) {
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_sync_layout);
         dialog.show();
 
         ImageView img_sync = dialog.findViewById(R.id.img_sync);
-        img_sync.setImageResource(R.drawable.info_icon);
+        img_sync.setImageResource(R.drawable.error_icon);
         TextView txt_message = dialog.findViewById(R.id.txt_message);
 
         if (item == 0) {
@@ -551,9 +561,14 @@ public class MainActivity extends AppCompatActivity
 
         Button buttonOK = dialog.findViewById(R.id.btn_sync_ok);
         AppConfig.changeRoundViewColor(buttonOK);
+        buttonOK.setTextColor(AppConfig.getThemeColor());
         buttonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(item == 0) {
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivityForResult(intent, ComonUtils.CODE_LOG_IN);
+                }
                 dialog.dismiss();
             }
         });
@@ -670,7 +685,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void processSignIn() {
         if (!internetConnected) {
             displayAlertDlg(1);
@@ -970,6 +985,7 @@ public class MainActivity extends AppCompatActivity
         catNumber.setText(catlist.size() + "");
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void processSync() {
         if (!internetConnected) {
             displayAlertDlg(1);
@@ -984,19 +1000,20 @@ public class MainActivity extends AppCompatActivity
 
             Button buttonOK = dialog.findViewById(R.id.btn_sync_ok);
             AppConfig.changeRoundViewColor(buttonOK);
+            buttonOK.setTextColor(AppConfig.getThemeColor());
             buttonOK.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     dialog.dismiss();
 
-                    Intent serviceIntent = new Intent(MainActivity.this, SyncService.class);
+                    Intent serviceIntent = new Intent(getApplicationContext(), SyncService.class);
                     startService(serviceIntent);
                 }
             });
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void refrestcatlistView() {
         catlist = categoryDetailControl.getAllCategoryDetailFromDBByUser();
 
@@ -1021,7 +1038,7 @@ public class MainActivity extends AppCompatActivity
         catlistAdapter.notifyDataSetChanged();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void processShowHideCatlistView() {
         if (catlist.size() > 0) {
             imgBtnExtentList.setVisibility(View.VISIBLE);
@@ -1040,7 +1057,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private class SyncReceiver extends BroadcastReceiver {
-        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+        @RequiresApi(api = Build.VERSION_CODES.M)
         @Override
         public void onReceive(Context context, Intent intent) {
 
@@ -1091,7 +1108,7 @@ public class MainActivity extends AppCompatActivity
         layout.setBackgroundResource(R.drawable.button_spinner_ripple);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Subscribe
     public void processEventString(MainEventString action) {
         if (action.getS().equals(ComonUtils.ACTION_REFRESH_CAT_LIST)) {
@@ -1119,6 +1136,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void processDeleteSelectedReport() {
         if (ComonUtils.deletedReports.size() == 0) {
             Toast.makeText(this, "Select items to delete", Toast.LENGTH_LONG).show();
@@ -1137,6 +1155,7 @@ public class MainActivity extends AppCompatActivity
 
         Button buttonOK = dialog.findViewById(R.id.btn_sync_ok);
         AppConfig.changeRoundViewColor(buttonOK);
+        buttonOK.setTextColor(AppConfig.getThemeColor());
         buttonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1148,6 +1167,7 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void processDeleteSelectedCategories() {
         if (ComonUtils.deletedCategories.size() == 0) {
             Toast.makeText(this, "Select items to delete", Toast.LENGTH_LONG).show();
@@ -1166,6 +1186,7 @@ public class MainActivity extends AppCompatActivity
 
         Button buttonOK = dialog.findViewById(R.id.btn_sync_ok);
         AppConfig.changeRoundViewColor(buttonOK);
+        buttonOK.setTextColor(AppConfig.getThemeColor());
         buttonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1186,8 +1207,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void processViewChart() {
-        Intent intent = new Intent(this, ChartViewActivity.class);
-        startActivity(intent);
+        if (currentUser.getUserEmail() == null || currentUser.getUserEmail().equals("")) {
+            displayAlertDlg(0);
+        } else if (currentUser.getUserEmail() != null && currentUser.getUserStatus() != ComonUtils.USER_STATUS_NORMAL) {
+            displayAlertDlg(2);
+        } else {
+            Intent intent = new Intent(this, ChartViewActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void processEditCategory(CategoryDetail categoryDetail) {
@@ -1347,5 +1374,11 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
 
+        int dpi = newConfig.densityDpi;
+
+    }
 }

@@ -66,6 +66,8 @@
 
                 <include layout="@layout/content_category__add__new_" />
 
+                <include layout="@layout/layout_placeholder_scrollview_for_softkeyboard" />
+
             </LinearLayout>
 
         </ScrollView>
